@@ -1,0 +1,3881 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+%                                                                         %
+% The Project Gutenberg EBook of Étude sur le Mouvement Permanent des Fluides, by 
+% François de Salvert                                                     %
+%                                                                         %
+% This eBook is for the use of anyone anywhere at no cost and with        %
+% almost no restrictions whatsoever.  You may copy it, give it away or    %
+% re-use it under the terms of the Project Gutenberg License included     %
+% with this eBook or online at www.gutenberg.org                          %
+%                                                                         %
+%                                                                         %
+% Title: Étude sur le Mouvement Permanent des Fluides                     %
+%        Thèses Présentées à la Faculté des Sciences de Paris pour        %
+%        Obtenir le Grade de Docteur ès Sciences Mathématiques            %
+%                                                                         %
+% Author: François de Salvert                                             %
+%                                                                         %
+% Release Date: July 5, 2010 [EBook #33083]                               %
+%                                                                         %
+% Language: French                                                        %
+%                                                                         %
+% Character set encoding: ISO-8859-1                                      %
+%                                                                         %
+% *** START OF THIS PROJECT GUTENBERG EBOOK FLUIDES ***                   %
+%                                                                         %
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+
+\def\ebook{33083}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                                                                  %%
+%% Packages and substitutions:                                      %%
+%%                                                                  %%
+%% book:     Required.                                              %%
+%% inputenc: Standard DP encoding. Required.                        %%
+%% fontenc:  Font encoding, for boldface smallcaps. Required.       %%
+%%                                                                  %%
+%% babel:    French language features. Required.                    %%
+%%                                                                  %%
+%% ifthen:   Logical conditionals. Required.                        %%
+%%                                                                  %%
+%% amsmath:  AMS mathematics enhancements. Required.                %%
+%% amssymb:  Additional mathematical symbols. Required.             %%
+%% mathrsfs: Script math font. Required.                            %%
+%%                                                                  %%
+%% alltt:    Fixed-width font environment. Required.                %%
+%%                                                                  %%
+%% perpage:  Start footnote numbering on each page. Required.       %%
+%%                                                                  %%
+%% calc:     Length calculations. Required.                         %%
+%% fix-cm:   Very large font on title page. Optional.               %%
+%%                                                                  %%
+%% fancyhdr: Enhanced running headers and footers. Required.        %%
+%%                                                                  %%
+%% geometry: Enhanced page layout package. Required.                %%
+%% hyperref: Hypertext embellishments for pdf output. Required.     %%
+%%                                                                  %%
+%%                                                                  %%
+%% Producer's Comments:                                             %%
+%%                                                                  %%
+%%   Changes are noted in this file with [** TN: Note]s.            %%
+%%                                                                  %%
+%% Compilation Flags:                                               %%
+%%                                                                  %%
+%%   The following behavior may be controlled by boolean flags.     %%
+%%                                                                  %%
+%%   ForPrinting (true by default):                                 %%
+%%   Compile a print-optimized PDF file. Set to false for screen-   %%
+%%   optimized file (pages cropped, one-sided, blue hyperlinks).    %%
+%%                                                                  %%
+%%                                                                  %%
+%% PDF pages: 55 (if ForPrinting set to true)                       %%
+%% PDF page size: A4                                                %%
+%% PDF bookmarks: created, point to ToC entries                     %%
+%% PDF document info: filled in                                     %%
+%%                                                                  %%
+%% Summary of log file:                                             %%
+%% * One overfull hbox (1.8pt too wide).                            %%
+%% * Two underfull hboxes.                                          %%
+%%                                                                  %%
+%%                                                                  %%
+%% Compile History:                                                 %%
+%%                                                                  %%
+%% July, 2010: adhere (Andrew D. Hwang)                             %%
+%%             texlive2007, GNU/Linux                               %%
+%%                                                                  %%
+%% Command block:                                                   %%
+%%                                                                  %%
+%%     pdflatex x2                                                  %%
+%%                                                                  %%
+%%                                                                  %%
+%% July 2010: pglatex.                                              %%
+%%   Compile this project with:                                     %%
+%%   pdflatex 33083-t.tex ..... TWO times                           %%
+%%                                                                  %%
+%%   pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6)                 %%
+%%                                                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\listfiles
+\documentclass[12pt,a4paper,leqno]{book}[2005/09/16]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[latin1]{inputenc}[2006/05/05]
+\usepackage[T1]{fontenc}[2005/09/27]        % the font encoding
+
+\usepackage[french]{babel}[2005/11/23]      % the language
+
+\usepackage{ifthen}[2001/05/26]  %% Logical conditionals
+
+\usepackage{amsmath}[2000/07/18] %% Displayed equations
+\usepackage{amssymb}[2002/01/22] %% and additional symbols
+\usepackage{mathrsfs}[1996/01/01]%% AMS script math font
+
+\usepackage{alltt}[1997/06/16]   %% boilerplate, credits, license
+
+\usepackage{perpage}[2006/07/15]
+
+\usepackage{calc}[2005/08/06]
+
+\newlength{\MySkip}
+\IfFileExists{fix-cm.sty}{%      %% For larger title page fonts
+  \usepackage{fix-cm}[2006/03/24]%
+  \newcommand{\MyHuge}{\fontsize{38}{48}\selectfont}%
+  \setlength{\MySkip}{0.375in}%
+}{% else
+  \newcommand{\MyHuge}{\Huge}%
+  \setlength{\MySkip}{0.25in}
+}
+
+% for running heads
+\usepackage{fancyhdr}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Interlude:  Set up PRINTING (default) or SCREEN VIEWING %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ForPrinting=true (default)           false
+% Asymmetric margins                   Symmetric margins
+% Black hyperlinks                     Blue hyperlinks
+% Start Preface, ToC, etc. recto       No blank verso pages
+%
+% Chapter-like ``Sections'' start both recto and verso in the scanned
+% book. This behavior has been retained.
+\newboolean{ForPrinting}
+
+%% COMMENT the next line for a SCREEN-OPTIMIZED VERSION of the text %%
+\setboolean{ForPrinting}{true}
+
+%% Initialize values to ForPrinting=false
+\newcommand{\Margins}{hmarginratio=1:1}     % Symmetric margins
+\newcommand{\HLinkColor}{blue}              % Hyperlink color
+\newcommand{\PDFPageLayout}{SinglePage}
+\newcommand{\TransNote}{Notes sur la transcription}
+\newcommand{\TransNoteText}{%
+  Ce livre a été préparé à l'aide d'images fournies par la Cornell
+  University Library: Historical Mathematics Monographs collection.
+  \bigskip
+
+  Ce fichier est optimisé pour être lu sur un écran, mais peut être
+  aisément reformaté pour être imprimé. Veuillez consulter le
+  préambule du fichier \LaTeX\ source pour les instructions.
+}
+
+%% Re-set if ForPrinting=true
+\ifthenelse{\boolean{ForPrinting}}{%
+  \renewcommand{\Margins}{hmarginratio=2:3} % Asymmetric margins
+  \renewcommand{\HLinkColor}{black}         % Hyperlink color
+  \renewcommand{\PDFPageLayout}{TwoPageRight}
+  \renewcommand{\TransNoteText}{%
+    Ce livre a été préparé à l'aide d'images fournies par la Cornell
+    University Library: Historical Mathematics Monographs collection.
+    \bigskip
+
+    Ce fichier est optimisée pour imprimer, mais peut être aisément
+    reformater pour être lu sur un écran. Veuillez consulter le
+    préambule du fichier \LaTeX\ source pour les instructions.
+  }
+}{% If ForPrinting=false, don't skip to recto
+  \renewcommand{\cleardoublepage}{\clearpage}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  End of PRINTING/SCREEN VIEWING code; back to packages  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifthenelse{\boolean{ForPrinting}}{%
+  \usepackage[body={5.25in,8.4in},\Margins]{geometry}[2002/07/08]
+}{%
+  \setlength{\paperwidth}{7.5in}%
+  \setlength{\paperheight}{10in}%
+  \usepackage[body={5.25in,8.4in},\Margins,includeheadfoot]{geometry}[2002/07/08]
+}
+
+\providecommand{\ebook}{00000}    % Overridden during white-washing
+\usepackage[pdftex,
+  hyperref,
+  hyperfootnotes=false,
+  pdfstartview=Fit,    % default value
+  pdfstartpage=1,      % default value
+  pdfpagemode=UseNone, % default value
+  bookmarks=true,      % default value
+  linktocpage=false,   % default value
+  pdfpagelayout=\PDFPageLayout,
+  pdfdisplaydoctitle,
+  pdfpagelabels=true,
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  colorlinks=true,
+  linkcolor=\HLinkColor]{hyperref}[2007/02/07]
+
+\hypersetup{pdftitle={The Project Gutenberg eBook \#\ebook: Étude sur le Mouvement Permanent des Fluides},
+  pdfauthor={\texorpdfstring{François}{Francois} de Salvert},
+  pdfkeywords={Joshua Hutchinson, \texorpdfstring{Sébastien}{Sebastien} Blondeel,
+    Project Gutenberg Online Distributed Proofreading Team,
+    Cornell University Historical Mathematical Monographs Collection}}
+
+% Re-crop screen-formatted version, accommodating wide displays
+\ifthenelse{\boolean{ForPrinting}}
+  {}
+  {\hypersetup{pdfpagescrop= 16 60 577 808}}% 4:3
+
+
+%%%% Fixed-width environment to format PG boilerplate %%%%
+\newenvironment{PGtext}{%
+\begin{alltt}
+\fontsize{9.2}{10.5}\ttfamily\selectfont}%
+{\end{alltt}}
+
+\newlength{\TmpLen} % Length for local, ad hoc needs
+
+% Miscellaneous style tweaks
+\renewcommand{\headrulewidth}{0pt}% No hrule in page header
+\setlength{\headheight}{15pt}
+
+\DeclareMathSizes{12}{11}{8}{6}
+
+\fancyhf{}
+\fancyhead[C]{( \thepage\ )}
+
+\emergencystretch1.5em % Loosen the spacing
+
+% Top-level footnote numbers restart on each page
+\MakePerPage{footnote}
+
+% Loosen vertical and horizontal spacing; for ad hoc local use
+\newcommand{\vloose}{\renewcommand{\baselinestretch}{1.5}}
+\newcommand{\hloose}{\spaceskip 0.75em}
+
+% Surround footnote markers with upright parentheses
+\makeatletter
+\renewcommand\@makefnmark%
+  {\mbox{\small\,\upshape(\@textsuperscript{\normalfont\@thefnmark})}}
+
+\renewcommand\@makefntext[1]%
+  {\noindent\makebox[2.4em][r]{\@makefnmark\,}#1}
+\makeatother
+
+% Semantic and convenience macros
+\newcommand{\DPtypo}[2]{#2} % For corrections.
+
+\newcommand{\tb}[1][4cm]{\rule{#1}{0.5pt}} % thought break
+\newcommand{\Ord}[2]{#1\textsuperscript{#2}} % ordinal
+
+\newcommand{\const}{\text{\upshape const.}}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\tsum}{\mathop{\textstyle\sum}\nolimits}
+
+\newcommand{\vol}{\mathrm{v}}
+
+\DeclareMathOperator{\opS}{\mathbf{S}}% operator S
+\DeclareMathOperator{\tang}{tang}
+
+\newcommand{\scrF}{\mathscr{F}}
+\newcommand{\scrX}{\mathscr{X}}
+\newcommand{\scrY}{\mathscr{Y}}
+\newcommand{\scrZ}{\mathscr{Z}}
+
+% Use upright capitals in math mode
+\DeclareMathSymbol{A}{\mathalpha}{operators}{`A}
+\DeclareMathSymbol{B}{\mathalpha}{operators}{`B}
+\DeclareMathSymbol{C}{\mathalpha}{operators}{`C}
+\DeclareMathSymbol{D}{\mathalpha}{operators}{`D}
+\DeclareMathSymbol{E}{\mathalpha}{operators}{`E}
+\DeclareMathSymbol{F}{\mathalpha}{operators}{`F}
+\DeclareMathSymbol{G}{\mathalpha}{operators}{`G}
+\DeclareMathSymbol{H}{\mathalpha}{operators}{`H}
+\DeclareMathSymbol{I}{\mathalpha}{operators}{`I}
+\DeclareMathSymbol{J}{\mathalpha}{operators}{`J}
+\DeclareMathSymbol{K}{\mathalpha}{operators}{`K}
+\DeclareMathSymbol{L}{\mathalpha}{operators}{`L}
+\DeclareMathSymbol{M}{\mathalpha}{operators}{`M}
+\DeclareMathSymbol{N}{\mathalpha}{operators}{`N}
+\DeclareMathSymbol{O}{\mathalpha}{operators}{`O}
+\DeclareMathSymbol{P}{\mathalpha}{operators}{`P}
+\DeclareMathSymbol{Q}{\mathalpha}{operators}{`Q}
+\DeclareMathSymbol{R}{\mathalpha}{operators}{`R}
+\DeclareMathSymbol{S}{\mathalpha}{operators}{`S}
+\DeclareMathSymbol{T}{\mathalpha}{operators}{`T}
+\DeclareMathSymbol{U}{\mathalpha}{operators}{`U}
+\DeclareMathSymbol{V}{\mathalpha}{operators}{`V}
+\DeclareMathSymbol{W}{\mathalpha}{operators}{`W}
+\DeclareMathSymbol{X}{\mathalpha}{operators}{`X}
+\DeclareMathSymbol{Y}{\mathalpha}{operators}{`Y}
+\DeclareMathSymbol{Z}{\mathalpha}{operators}{`Z}
+
+\DeclareInputText{176}{\ifmmode{{}^\circ}\else\textdegree\fi}
+\DeclareInputText{183}{\ifmmode\centerdot\else\textperiodcentered\fi}
+
+% page separators
+\newcommand{\DPPageSep}[1]{}
+
+% upright parentheses
+\renewcommand{\(}{\textup(}
+\renewcommand{\)}{\textup)}
+
+% Sectional units
+\newcounter{myunit}
+\newcommand{\Chapter}[2]{%
+  \cleardoublepage
+  \noindent\hrule
+  \refstepcounter{myunit}%
+  \phantomsection\pdfbookmark[0]{#1}{unit:\themyunit}%
+  \vspace*{30pt}
+  \section*{\LARGE\centering\MakeUppercase{#1}}
+  \begin{center}
+    \tb[2cm]
+  \end{center}
+  \ifthenelse{\not\equal{#2}{}}{%
+    \subsection*{\large\centering #2}
+    \begin{center}
+      \tb[1cm]
+    \end{center}
+    \vspace*{2\baselineskip}
+  }{}%
+}
+
+\newcommand\Section[3]{%
+  \section*{\centering\normalsize #1\MakeUppercase{#2}}
+  \refstepcounter{myunit}
+  \phantomsection%
+  \ifthenelse{\not\equal{#1}{}}{%
+    \pdfbookmark[1]{Section #1}{unit:\themyunit}%
+  }{}%
+  \ifthenelse{\not\equal{#3}{}}{%
+    \subsection*{\centering\footnotesize\scshape\MakeLowercase{#3}}
+  }{}%
+}
+
+
+% Marginal notes
+\newcommand{\MarginBox}[2][]{%
+  \mbox{}\marginpar{\centering\scriptsize #2}%
+  \ifthenelse{\not\equal{#1}{}}{\phantomsection\label{#1}}{}%
+}
+\newcommand{\marge}[2][]{%
+  \bigskip\par\MarginBox[#1]{#2}%
+}
+
+
+% Theorems et al.
+\newenvironment{thm}[1]{%
+  \bigskip\par{\scshape Théorème #1\@.}\phantomsection\label{thm:#1} ---\itshape}%
+{\upshape\bigskip}
+
+% No "Théorème heading, but provides guillemets
+\newenvironment{theorem}{\medskip\par«~\itshape}{\upshape~»\medskip}
+
+\newenvironment{lem}[1]{%
+  \bigskip\par{\scshape Lemme\phantomsection\label{lem:#1} #1\@.} ---\itshape}%
+{\upshape\bigskip}
+
+
+% Macros for the Faculté des sciences page
+\newcommand{\TitleRow}[1]{%
+%[** TN: Manually set widest row; similarly in other macros below]
+  \settowidth{\TmpLen}{\bfseries\footnotesize PROFESSEURS HONORAIRES}%
+  \parbox{\TmpLen}{{\bfseries\footnotesize\hangindent1em#1\dotfill}}%
+}
+
+\newcommand{\NameBox}[1]{%
+  \settowidth{\TmpLen}{\footnotesize\bfseries MILNE EDWARDS, Professeur.}%
+  \parbox{\TmpLen}{\footnotesize\textbf{#1}}%
+}
+
+\newcommand{\Name}[2][]{%
+  \settowidth{\TmpLen}{\footnotesize\bfseries MILNE EDWARDS, Professeur.}%
+  \ifthenelse{\equal{#1}{}}{%
+    \parbox{\TmpLen}{\footnotesize\textbf{#2}\dotfill}%
+  }{%
+    \parbox[b]{\TmpLen}{{\small\textbf{#1}}\\\footnotesize\textbf{#2}.}%
+  }%
+}
+
+\newcommand{\Dept}[1]{%
+  \settowidth{\TmpLen}{\footnotesize \qquad Sciences Mathématiques.}%
+  \parbox[t]{\TmpLen}{{\ \footnotesize\raggedright\hangindent1.5em#1\par}}%
+}
+
+% Macros for the Résumé analytique
+\newcommand{\ToCSection}[1]{%
+  \subsection*{\normalfont\footnotesize\centering\scshape#1}
+}
+
+\newcommand{\ToCSubsection}[1]{%
+  \subsubsection*{\normalfont\footnotesize\centering\itshape#1}
+}
+
+\newcommand{\ToCPg}[1]{\settowidth{\TmpLen}{999}\makebox[\TmpLen][r]{#1}}
+
+\newcommand{\ToCRow}[2]{%
+  \noindent\makebox[\linewidth][c]{\hyperref[#2]{#1\dotfill\ToCPg{\pageref{#2}}}}%
+}
+
+% \Ditto{#1} sets ditto mark in a box of width #1,
+\newcommand{\Dittomark}{»}
+\newcommand{\Ditto}[1]{%
+  \settowidth{\TmpLen}{#1}%
+  \makebox[\TmpLen][c]{\Dittomark}%
+}
+
+
+% Cross-referencing
+\newcommand{\Tag}[2][]{%
+  \phantomsection
+  \ifthenelse{\equal{#1}{}}{%
+    \label{eqn:#2}%
+  }{%
+    \label{eqn:#1}%
+  }
+  \tag*{#2}
+}
+
+\newcommand{\Eqno}[2][]{%
+  \ifthenelse{\equal{#1}{}}{%
+    \hyperref[eqn:#2]{#2}%
+  }{%
+    \hyperref[eqn:#1]{#2}%
+  }%
+}
+\newcommand{\Eqref}[2][équation]{\hyperref[eqn:#2]{#1~#2}}
+
+\newcommand{\Pagelabel}[1]{\phantomsection\label{#1}}
+\newcommand{\Pageref}[2][p.]{\hyperref[#2]{#1~\pageref{#2}}}
+\newcommand{\Pagerefs}[3][p.]{%
+  \ifthenelse{\equal{\pageref{#2}}{\pageref{#3}}}{%
+    \hyperref[#2]{#1~\pageref{#2}}%
+  }{%
+    \hyperref[#2]{#1~\pageref{#2}} et~\pageref{#3}%
+  }%
+}
+
+\newcommand{\ThmRef}[1]{%
+  \hyperref[thm:#1]{théorème~#1}%
+}
+
+\newcommand{\LemRef}[1]{%
+  \hyperref[lem:#1]{lemme~#1}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%% START OF DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\pagestyle{empty}
+\pagenumbering{Alph}
+
+\phantomsection
+\pdfbookmark[-1]{Matière Préliminaire.}{Preliminaire}
+
+%%%% PG BOILERPLATE %%%%
+\phantomsection
+\pdfbookmark[0]{PG Boilerplate.}{Boilerplate}
+
+\begin{center}
+\begin{minipage}{\textwidth}
+\small
+\begin{PGtext}
+The Project Gutenberg EBook of Étude sur le Mouvement Permanent des Fluides, by 
+François de Salvert
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.org
+
+
+Title: Étude sur le Mouvement Permanent des Fluides
+       Thèses Présentées à la Faculté des Sciences de Paris pour
+       Obtenir le Grade de Docteur ès Sciences Mathématiques
+
+Author: François de Salvert
+
+Release Date: July 5, 2010 [EBook #33083]
+
+Language: French
+
+Character set encoding: ISO-8859-1
+
+*** START OF THIS PROJECT GUTENBERG EBOOK FLUIDES ***
+\end{PGtext}
+\end{minipage}
+\end{center}
+
+\clearpage
+
+
+%%%% Credits and transcriber's note %%%%
+\begin{center}
+\begin{minipage}{\textwidth}
+\begin{PGtext}
+Produced by Sébastien Blondeel, Joshua Hutchinson, and the
+Online Distributed Proofreading Team at http://www.pgdp.net
+(This file was produced from images from the Cornell
+University Library: Historical Mathematics Monographs
+collection.)
+\end{PGtext}
+\end{minipage}
+\end{center}
+\vfill
+
+\begin{minipage}{0.85\textwidth}
+\small
+\phantomsection
+\pdfbookmark[0]{Note sur la Transcription.}{Transcription}
+\subsection*{\centering\normalfont\scshape%
+\normalsize\MakeLowercase{\TransNote}}%
+
+\raggedright
+\TransNoteText
+\end{minipage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%% FRONT MATTER %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\frontmatter
+\pagestyle{empty}
+
+\DPPageSep{001.png}{}%
+\iffalse
+Production Note
+
+Cornell University Library
+produced this volume to replace
+the irreparably deteriorated
+original. It was scanned using
+Xerox software and equipment at
+600 dots per inch resolution
+and compressed prior to storage
+using CCITT Group 4
+compression. The digital data
+were used to create Cornell's
+replacement volume on paper
+that meets the ANSI Standard
+Z39.48-1984. The production of
+this volume was supported in
+part by the Commission on
+Preservation and Access and the
+Xerox Corporation. 1990.
+\fi
+\DPPageSep{002.png}{}%
+\DPPageSep{003.png}{}%
+% Title page
+
+\begin{center}
+\noindent\makebox[\linewidth][c]{%
+\settowidth{\TmpLen}{\footnotesize\No d'ordre}%
+\rlap{\parbox[b]{\TmpLen}{\centering\footnotesize%
+    \No d'ordre  \\
+    \textbf{352} \\[-0.5\baselineskip]
+    $\underbrace{\rule{\TmpLen}{0pt}}_{}$}}
+\hfill\MyHuge \textbf{THÈSES}\hfill}
+\setlength{\TmpLen}{6pt}%
+
+\footnotesize PRÉSENTÉES \\[2\TmpLen]
+\makebox[0pt][c]{\Large\bfseries À LA FACULTÉ DES SCIENCES DE PARIS} \\[3\TmpLen]
+\scriptsize POUR OBTENIR \\[2\TmpLen]
+\small\bfseries LE GRADE DE DOCTEUR ÈS SCIENCES MATHÉMATIQUES, \\[3\TmpLen]
+\normalsize\textbf{PAR M.~\textsc{François} DE SALVERT}, \\[2\TmpLen]
+\scriptsize ANCIEN ÉLÈVE DE L'ÉCOLE POLYTECHNIQUE. \\[2\TmpLen]
+\tb[2cm] \\[2\TmpLen]
+\small%
+\begin{tabular}{r@{\ }c@{\ }l}
+\textbf{\Ord{1}{re} THÈSE.} & --- &
+    {\footnotesize \textsc{Étude sur le mouvement permanent des fluides. }}\\
+\textbf{\Ord{2}{e\ } THÈSE.} & --- &
+    {\footnotesize \textsc{Propositions données par la faculté.}}\\
+\end{tabular} \\[3\TmpLen]
+\tb \\[2\TmpLen]
+\textbf{Soutenues le\qquad\qquad 1874, devant la Commission d'Examen}. \\[2\TmpLen]
+\tb
+\begin{align*}%[** TN: Non-semantic expedient to use amsmath braces]
+  \text{\footnotesize MM.\ }
+  & \left.\text{\footnotesize PUISEUX,\quad \emph{Président}}\right. \\
+  & \left.\begin{aligned}
+      &\text{\footnotesize BOUQUET,} \\
+      &\text{\footnotesize BONNET,}
+    \end{aligned}\right\} \text{\emph{\footnotesize Examinateurs}}
+\end{align*}
+
+\tb
+\vfill
+\Large\textbf{PARIS,} \\[2\TmpLen]
+\large GAUTHIER-VILLARS, IMPRIMEUR-LIBRAIRE \\[2\TmpLen]
+\scriptsize DE L'ÉCOLE POLYTECHNIQUE, DU BUREAU DES LONGITUDES, \\[2\TmpLen]
+\footnotesize \textbf{SUCCESSEUR DE MALLET-BACHELIER},\\[2\TmpLen]
+Quai des Augustins, 55.\\
+\tb[1cm]\\[2\TmpLen]
+\textbf{\Large 1874}
+\end{center}
+\DPPageSep{004.png}{}%
+\newpage
+
+\begin{center}
+\setlength{\TmpLen}{4pt}%
+\Large\textbf{ACADÉMIE DE PARIS} \\
+\tb \\[2\TmpLen]
+\large\textbf{FACULTÉ DES SCIENCES DE PARIS.} \\[\TmpLen]
+\tb[1cm]
+\vfill
+%[** TN: Force centering of wide box]
+\makebox[0pt][c]{%
+$
+%[** TN: Non-semantic expedient to use amsmath braces]
+\renewcommand{\arraystretch}{0.8}% Tighten vertical spacing
+\begin{aligned}
+\TitleRow{DOYEN} &
+\quad\begin{array}{l}\Name[MM.]{MILNE EDWARDS, Professeur}\end{array}
+\Dept{Zoologie, Anatomie, Physiologie comparée.} \\
+%
+\TitleRow{PROFESSEURS HONORAIRES} &
+\left\{
+\begin{array}{l}\NameBox{DUMAS.} \\\NameBox{BALARD.}\end{array}
+\right. \\[4pt]
+%
+\TitleRow{PROFESSEURS} &
+\left\{
+\begin{array}{l}
+\Name{DELAFOSSE} \Dept{Minéralogie.} \\
+\Name{CHASLES}   \Dept{Géométrie supérieure.}\\
+\Name{LE VERRIER}\Dept{Astronomie.} \\
+\Name{P. DESAINS}\Dept{Physique.} \\
+\Name{LIOUVILLE} \Dept{Mécanique rationnelle.} \\
+\Name{PUISEUX}   \Dept{Astronomie.} \\
+\Name{HÉBERT}    \Dept{Géologie.} \\
+\Name{DUCHARTRE} \Dept{Botanique.} \\
+\Name{JAMIN}     \Dept{Physique.} \\
+\Name{SERRET}    \Dept{Calcul différentiel et intégral.} \\
+\Name{H.~S\textsuperscript{te}-CLAIRE DEVILLE} \Dept{Chimie.} \\
+\Name{PASTEUR}   \Dept{Chimie.} \\
+\Name{DE LACAZE-DUTHIERS} \Dept{Anatomie, Physiologie comparée, Zoologie.}\\
+\Name{BERT}      \Dept{Physiologie.} \\
+\Name{HERMITE}   \Dept{Algèbre supérieure.} \\
+\Name{BRIOT}     \Dept{Calcul des probabilités, Physique mathématique.}\\
+\Name{BOUQUET}   \Dept{Mécanique et physique expérimentale.}
+\end{array}
+\right. \\[4pt]
+%
+\TitleRow{AGRÉGÉS} &
+\left\{
+  \begin{array}{l}
+    \left.
+      \begin{aligned}
+        & \Name{BERTRAND} \\
+        & \Name{J. VIEILLE}
+      \end{aligned}
+    \right\}
+    \Dept{Sciences mathématiques.} \\
+    \Name{PELIGOT} \Dept{Sciences physiques.}
+  \end{array}
+\right. \\
+%
+\TitleRow{SECRÉTAIRE}
+%[** TN: Spacing hack]
+& \quad\begin{array}{l}\NameBox{PHILIPPON.}\end{array}
+\end{aligned}
+$}
+\vfill
+\noindent\hrule
+\medskip
+
+\footnotesize%
+\makebox[0pt][c]{\textsc{1067\quad Paris. --- Imprimerie de GAUTHIER-VILLARS, successeur de
+MALLET-BACHELIER,}} \\
+\textsc{Quai des Augustins, 55.}
+\end{center}
+\DPPageSep{005.png}{}%
+\newpage
+% Dedication
+
+\setlength{\TmpLen}{12pt}%
+\begin{center}
+\null\vfill
+\small À MON VÉNÉRÉ PROFESSEUR \\[3\TmpLen]
+{\Huge \bfseries\scshape\hloose Le P.~JOUBERT,}  \\[\TmpLen]
+\scriptsize DE L'ÉCOLE SAINTE-GENEVIÈVE,
+\end{center}
+\vspace*{6\TmpLen}
+
+\begin{flushright}
+\settowidth{\TmpLen}{\scriptsize D'AFFECTUEUSE RECONNAISSANCE.}%
+\parbox{\TmpLen}{\scriptsize\qquad HOMMAGE \\[4pt]
+D'AFFECTUEUSE RECONNAISSANCE.} \\[30pt]
+\small F.~DE SALVERT.\hspace*{2em}
+\end{flushright}
+\vfill
+\DPPageSep{006.png}{}%
+\DPPageSep{007.png}{}%
+
+
+\mainmatter
+\phantomsection\pdfbookmark[-1]{Matière Primaire.}{Main Matter}
+\pagestyle{fancy}
+\thispagestyle{empty}
+
+
+\Chapter{Première Thèse.}
+{ÉTUDE \\[12pt] {\scriptsize SUR LE} \\[12pt] MOUVEMENT PERMANENT DES FLUIDES.}
+
+\Section{}{Introduction.}{}
+
+\marge[ExposeSujet]{Exposé du sujet}
+Nous n'envisageons dans ce travail que l'hypothèse particulière
+connue sous le nom de \emph{mouvement permanent des fluides}. Ce cas, en
+effet, en même temps qu'il est le plus fréquent dans la pratique et le
+plus intéressant au point de vue des applications, est aussi, par une
+coïncidence heureuse qui se présente dans un grand nombre de
+questions, beaucoup plus facile à étudier que le cas général, et cela
+par un double motif: d'abord, au point de vue analytique, la disparition
+des dérivées relatives au temps introduit une simplification
+notable dans les équations du mouvement, et la difficulté de leur
+intégration en est certainement diminuée, quoiqu'elle reste toujours
+fort grande; en second lieu, et c'est pour nous le point le plus important,
+la réduction des quatre variables indépendantes aux trois
+seules coordonnées $x$,~$y$,~$z$ permet de substituer aux procédés purement
+analytiques une étude géométrique fondée sur la considération
+\DPPageSep{008.png}%
+de surfaces représentatives, ainsi qu'on le fait dans une foule de questions
+de Mécanique ou de Physique mathématique, telles que la rotation
+des corps, l'équilibre des fluides, ou les problèmes de chaleur et
+d'électricité.
+
+En effet, supposons que l'on ait déterminé la fonction de $x$,~$y$ et~$z$,
+qui représente chacun des cinq éléments dont dépend la connaissance
+du mouvement, et soit, par exemple,
+\[
+p = f(x,y,z)
+\]
+$p$~représentant la pression; on voit que, si l'on pose
+\[
+f(x,y,z) = \const,
+\]
+on aura une famille de surfaces analogues aux \emph{surfaces de niveau}, auxquelles
+elles se réduisent dans le cas de l'équilibre, ou encore aux
+\emph{surfaces isothermes}, famille qui sera définie par cette propriété qu'en
+tous les points d'une même surface la pression aura la même valeur,
+et qu'on pourra appeler par conséquent \emph{surfaces d'égale pression}.
+
+On pourra considérer de même des surfaces d'égale densité, d'égale
+force vive, ou toute autre analogue définie par la constance d'un élément
+quelconque du mouvement, et l'on comprend que la considération
+directe de ces surfaces pourra, jusqu'à un certain point, remplacer
+les procédés analytiques pour arriver à la découverte des propriétés
+du mouvement.
+
+C'est à ce point de vue, à la fois géométrique et analytique, que
+nous allons nous placer dans ce travail, et nous baserons cette étude
+sur la considération des \emph{surfaces de nulle résistance}, que nous allons
+maintenant définir, et dont nous montrerons les propriétés remarquables.
+
+
+\Section{I.}{ --- Surfaces de Nulle Résistance}
+{Définitions; Propriétés Caractéristiques.}
+
+\marge[ResistanceMouvementFluide]{Résistance\\au mouvement\\d'un fluide.}
+Lorsqu'un fluide est en équilibre, et qu'on vient à introduire une
+paroi solide au sein de sa masse, la pression supportée par chaque
+élément de cette paroi est précisément égale a celle que supportait
+\DPPageSep{009.png}%
+la molécule fluide primitivement située au même point, et qu'on
+nomme \emph{pression hydrostatique} relative à ce point; mais, si le fluide
+est en mouvement, il n'en sera plus ainsi. Chaque élément de la
+paroi supportera, dans ce cas, non-seulement la pression hydrostatique~$p$,
+qui s'exerce sur ses deux faces (et qu'il supporterait seule,
+s'il participait au mouvement du fluide), mais encore un effort provenant
+du mouvement même du fluide, et dirigé suivant ce mouvement,
+lequel variera évidemment en chaque point avec la grandeur
+et la direction de la vitesse. Cet effort, qui tend à entraîner la paroi
+dans le mouvement du fluide, ou, ce qui est la même chose au sens
+près, la résistance qu'elle oppose au mouvement lorsqu'on la maintient
+fixe, ont tous deux pour expression, en grandeur absolue,
+$\rho\omega V^2 \cos\theta$,\Pagelabel{page:5} $\rho$~étant la densité, $V$~la vitesse, $\omega$~l'élément de paroi, et
+$\theta$~l'angle aigu que forme la normale à la paroi avec la vitesse du
+fluide\footnotemark.
+\footnotetext{Voir \bsc{Duhamel}, \textit{Cours de Mécanique}, 3\ieme~édition, liv.~IV, §~193 et suiv.}
+Il résulte immédiatement de cette expression, ce qui du
+reste est presque évident \textit{a~priori}, que si $\theta = 90°$, c'est-à-dire si le plan
+de la paroi contient la direction de la vitesse, la résistance dont
+nous parlons sera nulle, et, par conséquent, une surface dont tous les
+éléments satisferaient à cette condition n'opposerait aucune résistance
+au mouvement du fluide. Cette condition, en particulier, se trouve
+forcément remplie par les parois fixes du vase ou du réservoir qui
+contient un fluide en mouvement.
+
+\marge[SurfacesNulleResistance]{Surfaces\\de nulle résistance}
+D'après cela, nous appellerons \emph{surface de nulle résistance {\upshape«\;}une surface
+telle qu'en chacun de ses points la vitesse du fluide soit située dans le
+plan tangent{\upshape\;»}}.
+
+On conclura immédiatement de cette définition:
+
+\primo Que si l'on considère un point du fluide, une surface de nulle
+résistance passant par ce point, et la molécule qui y est actuellement,
+son mouvement tout entier s'effectuera sur cette surface, en sorte que
+les surfaces de nulle résistance contiennent les trajectoires de toutes
+les molécules fluides;
+
+\secundo Qu'aucune molécule fluide ne peut traverser cette surface, puisque,
+pour cela, il faudrait qu'au moment de son passage sa vitesse fit
+\DPPageSep{010.png}%
+un angle fini avec la surface, en sorte que toutes les molécules situées
+actuellement à l'intérieur de cette surface y resteront constamment, et
+de même les molécules actuellement extérieures le seront aussi indéfiniment.
+
+On peut donc dire qu'une surface de nulle résistance partage la
+masse fluide en deux portions telles, que le mouvement n'opère entre
+elles aucun échange d'éléments.
+
+\marge{Propriétés relatives:}
+Il résulte de là deux propriétés importantes que nous allons établir.
+
+\marge[ProprietesEllipsoideCentral]{(\textit{a}) à l'ellipsoïde\\central d'inertie}
+La considération du centre de gravité d'un système en mouvement
+est assez familière en Dynamique pour que nous n'ayons pas à la rappeler
+ici; mais nous pousserons plus loin l'analogie dans la même voie,
+et nous considérerons ce que nous appellerons \emph{plans principaux, moments},
+et \emph{ellipsoïde d'inertie} d'un système à une époque donnée, c'est-à-dire
+les plans principaux, moments et ellipsoïde d'inertie qu'il y
+aurait lieu de considérer, si le système venait à être solidifié dans la
+figure qu'il offre à cette époque.
+
+D'après cela, de même que le centre de gravité du système, à une
+époque quelconque, sera déterminé par la condition que, en prenant ce
+point pour origine des coordonnées, les sommes
+\[
+\opS mx, \quad \opS my, \quad \opS mz,
+\]
+étendues à toutes les molécules~$m$ du système, soient nulles à cette
+époque, de même les plans principaux d'inertie, relatifs au même
+point, seront déterminés par la condition jointe à la précédente que,
+en les prenant pour plans coordonnés, les sommes
+\[
+\opS myz, \quad \opS mzx, \quad \opS mxy,
+\]
+soient également nulles à la même époque; enfin les sommes
+\[
+\opS m(y^2+z^2), \quad
+\opS m(z^2+x^2), \quad
+\opS m(x^2+y^2),
+\]
+prises dans les mêmes conditions, seront pour nous les moments principaux
+d'inertie, relatifs au centre de gravité, pour la même époque.
+
+Si l'on applique maintenant ces considérations à une portion de la
+masse fluide délimitée actuellement par une surface choisie arbitrairement,
+\DPPageSep{011.png}%
+il est facile de voir qu'en général ces divers éléments varieront
+de grandeur ou de position avec le temps. En effet, supposons que
+l'on ait déterminé ces différents éléments pour la position actuelle de
+la masse considérée, et prenons le centre de gravité et les plans principaux
+d'inertie, relatifs à cette position, pour origine et plans fixes de
+coordonnées. Parmi les sommes ci-dessus, les six premières seront
+nulles par hypothèse; mais, si nous calculons leurs valeurs pour les
+époques successives, elles varieront forcément avec le temps; car, en
+raison de la continuité du fluide, ce sont en réalité des intégrales
+triples par rapport à $x$,~$y$,~$z$ dont les limites varient à chaque instant
+avec la configuration extérieure de la masse considérée. Elles ne resteront
+donc pas constamment nulles, et, conséquemment, l'origine et
+les plans coordonnés ne seront pas constamment le centre de gravité
+et les plans principaux d'inertie du système considéré. La valeur des
+moments principaux d'inertie variera en même temps par la même
+raison, et, par conséquent, l'ellipsoïde central qu'il y aurait lieu de
+considérer variera à chaque instant de grandeur et de position.
+
+Il en serait tout autrement si nous considérions une portion de la
+masse fluide délimitée actuellement par des surfaces de nulle résistance;
+car, en vertu de la remarque faite plus haut, la configuration
+extérieure de cette masse restera invariablement la même, et, conséquemment,
+les limites d'intégration ne variant plus, les différentes
+sommes ci-dessus seront alors des constantes. L'origine et les plans
+coordonnés seront donc alors constamment le centre de gravité et les
+plans principaux d'inertie relatifs à ce point; et d'ailleurs les moments
+d'inertie relatifs au même point conserveront constamment la même
+grandeur. Nous pourrons, en conséquence, énoncer la propriété suivante:
+
+\begin{thm}{I}
+L'ellipsoïde central d'inertie, relatif à une portion du
+fluide limitée par des surfaces de nulle résistance, reste invariable de forme
+et de position pendant le mouvement.
+\end{thm}
+
+Ces conclusions sont d'ailleurs presque évidentes dans ce cas, puisque,
+d'une part, en vertu de l'hypothèse de la permanence, les densités
+sont constantes en chaque point, et que, d'autre part, en vertu du
+choix de la surface limitative, on considère toujours les mêmes points
+\DPPageSep{012.png}%
+de l'espace. L'assimilation de la masse fluide à un solide invariable de
+position s'impose alors d'elle-même à l'esprit; le centre de gravité et
+l'ellipsoïde central du système sont, à un instant quelconque, le centre
+de gravité et l'ellipsoïde central de ce solide, et par conséquent, comme
+lui, invariables de position aussi bien que de grandeur.
+
+Nous allons maintenant montrer une seconde propriété des surfaces
+de nulle résistance qui est précisément relative à ce \emph{solide représentatif}.
+
+\marge[ProprietesSoliceRepresentatif]{(\textit{b}) au solide\\représentatif}
+Conformément à ce qui précède, nous appellerons \emph{solide représentatif}
+correspondant à une portion du fluide un solide continu qui,
+occupant la même étendue de l'espace, offrirait en chaque point la
+même densité que le fluide considéré, et nous énoncerons cette nouvelle
+propriété:
+
+\begin{thm}{II}
+Le solide représentatif correspondant à une portion
+de la masse fluide limitée par des surfaces de nulle résistance, serait en
+équilibre sous l'action des forces qui sollicitent cette masse.
+\end{thm}
+
+En effet, désignons par $m\scrX$,~$m\scrY$,~$m\scrZ$ les composantes de la force
+\emph{totale}~$m\scrF$, qui sollicite la molécule de masse~$m$, c'est-à-dire la résultante
+des actions tant intérieures qu'extérieures qui s'exercent sur cette
+molécule, en y comprenant les liaisons qui proviennent de la constitution
+même du fluide, en sorte que l'on puisse considérer chaque
+molécule comme entièrement libre; les équations de son mouvement
+seront
+\[
+\Tag{(1)}
+\frac{d^2x}{dt^2} = \scrX, \quad
+\frac{d^2y}{dt^2} = \scrY, \quad
+\frac{d^2z}{dt^2} = \scrZ.
+\]
+Nous en conclurons, par une combinaison facile,
+\begin{align*}
+z \frac{d^2y}{dt^2} - y \frac{d^2z}{dt^2} &= \scrY z - \scrZ y, \\
+x \frac{d^2z}{dt^2} - z \frac{d^2x}{dt^2} &= \scrZ x - \scrX z, \\
+y \frac{d^2x}{dt^2} - x \frac{d^2y}{dt^2} &= \scrX y - \scrY x;
+\end{align*}
+puis, en multipliant par~$m$ et faisant la somme de ces différentes équations
+\DPPageSep{013.png}%
+pour toutes les molécules~$m$ de la masse considérée, nous obtiendrons
+celles-ci:
+\begin{gather*}
+\begin{aligned}
+\opS m\frac{d^2 x}{dt^2} &= \opS m\scrX, \\
+\opS m\frac{d^2 y}{dt^2} &= \opS m\scrY, \\
+\opS m\frac{d^2 z}{dt^2} &= \opS m\scrZ;
+\end{aligned}
+\displaybreak[1] \\
+\begin{aligned}
+\opS m\left(z\frac{d^2 y}{dt^2} - y\frac{d^2 z}{dt^2}\right)
+  &= \opS m(\scrY z - \scrZ y),\\
+\opS m\left(x\frac{d^2 z}{dt^2} - z\frac{d^2 x}{dt^2}\right)
+  &= \opS m(\scrZ x - \scrX z),\\
+\opS m\left(y\frac{d^2 x}{dt^2} - x\frac{d^2 y}{dt^2}\right)
+  &= \opS m(\scrX y - \scrY x).
+\end{aligned}
+\end{gather*}
+
+Le fluide étant supposé continu, chacune de ces sommes est une
+intégrale triple, et, suivant une remarque déjà faite, les limites de
+l'intégration, c'est-à-dire la surface extérieure de la masse considérée,
+étant invariables avec le temps, ainsi que la masse de chaque molécule,
+on peut écrire
+\begin{gather*}
+\begin{aligned}
+\opS m\frac{d^2 x}{dt^2} &= \frac{d^2 \opS mx}{dt^2}, \\
+\opS m\frac{d^2 y}{dt^2} &= \frac{d^2 \opS my}{dt^2}, \\
+\opS m\frac{d^2 z}{dt^2} &= \frac{d^2 \opS mz}{dt^2};
+\end{aligned}
+\displaybreak[1] \\
+\begin{aligned}
+\opS m\left(z\frac{d^2 y}{dt^2} - y\frac{d^2 z}{dt^2}\right)
+  &= \frac{d}{dt} \opS m\left(z\frac{dy}{dt} - y\frac{dz}{dt}\right),\\
+\opS m\left(x\frac{d^2 z}{dt^2} - z\frac{d^2 x}{dt^2}\right)
+  &= \frac{d}{dt} \opS m\left(x\frac{dz}{dt} - z\frac{dx}{dt}\right),\\
+\opS m\left(y\frac{d^2 x}{dt^2} - x\frac{d^2 y}{dt^2}\right)
+  &= \frac{d}{dt} \opS m\left(y\frac{dx}{dt} - x\frac{dy}{dt}\right).
+\end{aligned}
+\end{gather*}
+
+Or, si l'on considère les sommes
+\begin{gather*}
+\opS mx,\quad  \opS my,\quad \opS mz, \\
+%
+\opS m\left(z\frac{dy}{dt} - y\frac{dz}{dt}\right),\quad
+\opS m\left(x\frac{dz}{dt} - z\frac{dx}{dt}\right),\quad
+\opS m\left(y\frac{dx}{dt} - x\frac{dy}{dt}\right)
+\end{gather*}
+\DPPageSep{014.png}%
+comme des intégrales triples par rapport à $x$,~$y$,~$z$, elles seront évidemment
+indépendantes du temps, puisque d'une part le temps n'entre
+point explicitement sous le signe somme, et que d'autre part les
+limites de l'intégration n'en dépendent pas elles-mêmes. Les seconds
+membres des six équations que nous venons d'écrire sont donc nuls,
+et par conséquent aussi ceux des six autres qui les précèdent, d'où,
+en définitive, les six équations suivantes:
+\[
+\Tag{(2)}
+\left\{
+\begin{aligned}
+&\opS m\scrX = 0,  &
+&\opS m\scrY = 0, &
+&\opS m\scrZ = 0, \\
+&\opS m(\scrY z - \scrZ y) = 0 &
+&\opS m(\scrZ x - \scrX z) = 0 &
+&\opS m(\scrX y - \scrY x) = 0
+\end{aligned}
+\right.
+\]
+
+On reconnaît immédiatement dans ces équations la forme très-connue
+des équations d'équilibre des solides. Ces équations, qui comprennent
+toutes les forces, tant intérieures qu'extérieures, qui sollicitent
+la masse fluide, expriment donc parfaitement l'équilibre du
+solide représentatif, supposé soumis à l'action de ces forces, ce qui
+justifie la proposition énoncée.
+
+Toutefois, il convient de remarquer, dès maintenant, que les forces
+\emph{intérieures}, c'est-à-dire celles qui s'exercent entre deux molécules quelconques
+de la masse considérée, étant égales deux à deux, et de signes
+contraires, disparaîtront de ces équations, en sorte qu'il n'y entrera
+plus en réalité que les forces \emph{extérieures}, et les forces de liaison ou
+pressions, qui proviennent de la partie du fluide extérieure à celle que
+l'on aura considérée.
+
+Si, au lieu d'appliquer les six équations précédentes au solide représentatif,
+on les applique à la masse fluide elle-même, on arrive à une
+remarque intéressante déjà faite dans le Cours de Mécanique. On sait
+que les six équations dites d'\emph{équilibre des solides} sont nécessaires pour
+l'équilibre d'un système quelconque; mais elles ne sont suffisantes que
+dans le cas d'un système invariable\footnotemark.
+\footnotetext{Voir \bsc{Delaunay}, \textit{Traité de Mécanique rationnelle} (3\ieme~édition), §~183, p.~304, et §~185, p.~308.}
+Si l'on eût douté de cette
+dernière proposition, le résultat ci-dessus en aurait fourni une preuve
+péremptoire en montrant un système en mouvement, pour lequel elles
+sont néanmoins vérifiées.
+\DPPageSep{015.png}%
+
+\marge[ExamenCasGeneral]{Examen du cas\\général.}
+Afin de bien montrer que cette propriété est réellement caractéristique
+des surfaces de nulle résistance, nous allons l'établir d'une
+autre façon, en cherchant d'une manière générale quelles forces il faudrait
+appliquer à un solide représentatif quelconque, pour le maintenir
+en équilibre sous l'action de ces forces jointes à celles qui sollicitent
+le fluide.
+
+\marge[DemonstrationSynthetiqueI]{Démonstration synthétique.}
+Pour cela, appliquons d'abord aux molécules fluides contenues à
+l'intérieur d'une surface quelconque les deux théorèmes généraux
+de la Dynamique relatifs aux quantités de mouvement d'un système
+matériel.
+
+En effet, isolons par la pensée, au sein d'un fluide en mouvement,
+une portion de la masse circonscrite par une surface quelconque
+$ABCD\dots$; et soit $A'B'C'D'\dots$ la surface infiniment voisine qui renferme
+la même masse au bout du temps infiniment petit~$dt$. Les volumes
+compris sous ces deux surfaces se composeront d'une partie finie commune,
+et de calottes infiniment minces qui appartiendront exclusivement
+à l'une ou à l'autre. Parmi ces calottes, les unes renfermeront
+les molécules qui sont sorties de la première surface, les autres celles
+qui y sont entrées, de sorte que si, en chaque point de cette surface,
+on projette sur la normale \emph{intérieure} la vitesse du fluide relative à ce
+point, la projection ou \emph{vitesse normale}~$V_n$ sera positive pour tous les
+points de certaines calottes, et négative pour tous les points des autres,
+et par conséquent nulle pour tous les points des lignes de séparation,
+c'est-à-dire pour les intersections des deux surfaces.
+
+Cela posé, appliquons au déplacement infiniment petit que nous
+venons de définir le théorème des quantités de mouvements projetées
+sur un axe, lequel consiste en ce que l'accroissement de la somme des
+quantités de mouvement du système est égal à la somme des impulsions
+des forces extérieures appliquées au système pendant le temps considéré.
+
+Écrivons d'abord le second membre de cette équation, c'est-à-dire la
+somme de ces impulsions, qui se forme sans difficulté.
+
+Les forces extérieures sont ici:
+
+\primo Les forces extérieures données, qui s'exercent sur toute l'étendue
+de la masse considérée, et donneront par conséquent un terme tel, que
+\DPPageSep{016.png}%
+$\opS\varpi R_p\, dt$, $R_p$~étant la composante de ces forces dirigées suivant l'axe considéré,
+et rapportée à l'unité de masse, $\varpi$~désignant l'élément de masse,
+et $\opS$~une sommation s'étendant à tout le volume de la masse considérée.
+
+\secundo Les pressions provenant des molécules fluides extérieures à la
+masse que nous considérons. Ces forces, s'exerçant seulement sur la
+surface qui limite cette masse, donneront un terme tel, que $\tsum \omega p \cos\delta · dt$,
+où $\delta$~représente l'angle de la normale intérieure à cette surface avec
+l'axe considéré, $\omega$~l'élément de surface, et $\tsum$~une sommation s'étendant
+à toute la surface extérieure de la masse considérée. Le second membre
+de l'équation à former, ou la somme des impulsions, sera donc
+\[
+\opS \varpi R_p\, dt + \tsum \omega p \cos\delta · dt.
+\]
+
+Passons maintenant au premier membre, ou à l'accroissement de la
+quantité de mouvement du système.
+
+Si l'on désigne par~$V_p$ la projection de la vitesse sur l'axe considéré,
+il faudra former la somme $\opS \varpi V_p$ relative aux deux positions successives
+de la masse fluide, et faire la différence des deux résultats. Or il
+est facile de voir que, en vertu de la permanence du mouvement, toute
+la portion commune aux deux surfaces n'interviendra pas dans ce
+résultat, car les molécules fluides reprenant par hypothèse la même
+vitesse et la même densité en passant au même point, les éléments
+correspondant à ces points seront les mêmes dans les deux sommes,
+et disparaîtront par conséquent du résultat. La différence cherchée se
+réduit donc à la différence entre la somme des quantités de mouvement
+des portions qui sont sorties de la surface, et la somme des quantités
+de mouvement des portions qui y sont entrées.
+
+Considérons les premières pour lesquelles, comme nous l'avons déjà
+remarqué, la vitesse normale~$V_n$ est négative. Si nous découpons la
+portion correspondante de la surface en éléments infiniment petits~$\omega$,
+on voit que le volume du fluide qui est sorti de la surface par un de ces
+éléments peut être considéré comme un cylindre droit de base~$\omega$, dont
+la hauteur serait $-V_n\,dt$, la masse $-\rho \omega V_n\, dt$, et par conséquent la
+quantité du mouvement projetée $-\rho \omega V_n\, dt\, V_p$. Or, comme la réunion
+de tous ces volumes élémentaires constitue évidemment la portion de
+la masse fluide qui est sortie de la surface, la quantité de mouvement
+correspondant à cette portion sera $-\tsum_1 \rho \omega V_n\, dt\, V_p$, en désignant par~$\tsum_1$
+\DPPageSep{017.png}%
+une sommation s'étendant à toutes les portions de la surface par
+lesquelles il est sorti du fluide.
+
+Si nous calculons de même la quantité de mouvement correspondant
+à la portion de masse fluide qui est entrée dans la surface, il est
+évident que nous obtiendrons une expression tout analogue, sauf
+qu'ici $V_n$~étant positif, la longueur du cylindre sera $+V_n\, dt$, et par
+conséquent l'expression résultante sera $+\tsum_2 \rho\omega V_n\, dt\, V_p$, la sommation~$\tsum_2$
+s'étendant cette fois aux portions de surface par lesquelles il est
+entré du fluide.
+
+Comme il faut faire maintenant la différence de ces deux expressions,
+nous trouverons en définitive que l'accroissement total de la quantité
+de mouvement du système sera
+\[
+-\tsum_1 \omega\rho V_n\, dt\, V_p -\tsum_2 \omega\rho V_n\, dt\, V_p
+  = -\tsum \omega\rho V_n\, dt\, V_p,
+\]
+la sommation~$\tsum$ s'étendant désormais à toute la surface. En rapprochant
+les deux membres que nous avons ainsi évalués, l'équation que nous
+voulions établir sera
+\[
+\opS \varpi R_p\, dt + \tsum \omega p \cos\delta · dt
+  = -\tsum \omega\rho V_n\, dt\, V_p
+\]
+ou en faisant passer tous les termes dans le premier membre, et supprimant le facteur commun~$dt$,
+\[
+\opS \varpi R_p + \tsum \omega p \cos\delta + \tsum \omega\rho V_n V_p = 0.
+\]
+
+Cela posé, si l'on désigne, conformément à l'usage, par $u$,~$v$,~$w$ les
+composantes de la vitesse suivant les axes coordonnés; par $X$,~$Y$,~$Z$ les
+composantes suivant ces axes de la force extérieure donnée, rapportées
+à l'unité de masse; enfin par $\alpha$,~$\beta$,~$\gamma$ les angles que forme avec les
+mêmes axes la normale \emph{intérieure} à la surface considérée, et que l'on
+prenne successivement pour axe de projection les trois axes coordonnés,
+l'équation ci-dessus donnera lieu aux trois suivantes:
+\[
+\Tag{(3)}
+\left\{
+  \begin{aligned}
+    \opS \varpi X &+ \tsum \omega p \cos \alpha + \tsum \omega\rho u\, V_n = 0,\\
+    \opS \varpi Y &+ \tsum \omega p \cos \beta  + \tsum \omega\rho v\, V_n = 0,\\
+    \opS \varpi Z &+ \tsum \omega p \cos \gamma + \tsum \omega\rho w V_n = 0.
+  \end{aligned}
+\right.
+\]
+
+Ayant ainsi formé une première fois la quantité de mouvement et
+les impulsions des forces extérieures correspondant à chaque élément
+\DPPageSep{018.png}%
+de la masse considérée, si au lieu de les projeter sur les trois axes coordonnés
+nous en prenons les moments par rapport à ces axes, nous
+trouverons, à l'aide des mêmes raisonnements, et en appliquant l'autre
+théorème général de la Dynamique qui est relatif à cet objet, les trois
+autres équations suivantes:
+\[
+\Tag{(4)}
+\left\{
+  \begin{aligned}
+  \opS \varpi (Yz - Zy)
+  &+ \tsum\omega p(z\cos\beta - y\cos\gamma)
+  + \tsum\omega\rho(vz\, - wy)V_n = 0,\\
+  \opS \varpi (Zx - Xz)
+  &+ \tsum\omega p(x\cos\gamma - z\cos\alpha)
+  + \tsum\omega\rho(wx -\, uz)V_n = 0,\\
+  \opS \varpi(Xy - Yx)
+  &+ \tsum\omega p(y\cos\alpha - x\cos\beta)
+  + \tsum\omega\rho(uy\, -\, vz)V_n = 0.
+\end{aligned}
+\right.
+\]
+
+Les équations \Eqno{(3)}~et~\Eqno{(4)}, un peu longues à établir, sont intéressantes
+en ce qu'elles indiquent quelles forces il faudrait appliquer au solide
+représentatif correspondant à une surface quelconque, pour le maintenir
+en équilibre, conjointement avec les forces qui sollicitent la masse
+fluide.
+
+En effet, on reconnaît encore dans la forme de ces équations les
+conditions qui expriment l'équilibre des trois systèmes de force suivants:
+
+\primo Une force appliquée à chaque élément de la masse considérée, et
+dont les composantes seraient $\varpi X$,~$\varpi Y$,~$\varpi Z$, c'est-à-dire l'ensemble des
+forces extérieures données.
+
+\secundo Une force égale à~$p$ appliquée à chaque élément de la surface
+extérieure de la masse considérée, et suivant la normale intérieure à
+cette surface, c'est-à-dire l'ensemble des actions exercées par les parties
+extérieures du fluide sur la portion de masse considérée.
+
+Ces deux premiers systèmes réunis tiennent lieu dans les équations (3)~et~(4)
+de l'ensemble des forces qui sollicitent la masse considérée;
+car, en vertu d'une remarque déjà faite, les forces intérieures,
+c'est-à-dire celles qui s'exercent entre deux molécules de cette masse
+ne donneraient aucun terme dans ces équations, comme étant deux à
+deux égales et de signes contraires, en sorte que l'ensemble des deux
+premiers termes de ces mêmes équations représente exactement le
+premier membre des \Eqref[équations]{(2)}\Pagelabel{EquationsDeux}.
+
+\tertio Enfin une force appliquée également à chaque élément de la
+surface, et dont les composantes seraient respectivement
+\[
+\omega\rho u V_n,\quad \omega\rho v V_n,\quad \omega\rho w V_n.
+\]
+\DPPageSep{019.png}%
+
+Il est facile d'interpréter la signification de ce dernier système; car,
+si l'on désigne respectivement par $\lambda$,~$\mu$,~$\nu$ et~$\theta$ les angles de la vitesse
+avec les trois axes coordonnés et la normale intérieure de la surface,
+on aura
+\begin{gather*}
+\Tag{(5)}
+u = V \cos\lambda, \quad v = V \cos\mu, \quad w = V \cos\nu, \\
+\DPtypo{V}{V_n} = V \cos \theta,
+\end{gather*}
+et, par conséquent, en substituant,
+\begin{align*}
+  \omega \rho u V_n &= \omega \rho V^2 \cos\theta · \cos\lambda, \\
+  \omega \rho v V_n &= \omega \rho V^2 \cos\theta · \cos\mu, \\
+  \omega \rho w V_n &= \omega \rho V^2 \cos\theta · \cos\nu.
+\end{align*}
+Or, si l'on se reporte à ce que nous avons dit \Pageref[page]{page:5}, sur la résistance
+d'un élément, de surface au mouvement du fluide, on voit que le facteur
+$\omega \rho V^2 \cos\theta$ représente en grandeur absolue la résistance de l'élément~$\omega$,
+et que, d'ailleurs, ce facteur sera positif ou négatif, suivant
+que l'angle~$\theta$ sera plus petit ou plus grand que $90$~degrés, ou, en
+d'autres termes, suivant que la vitesse sera dirigée vers l'intérieur de
+la surface ou vers l'extérieur. D'après cela, les trois composantes ci-dessus
+seront, dans tous les cas, celles d'une force égale à la résistance
+de l'élément, dirigée suivant la vitesse en ce point, et dans celui des
+deux sens qui correspond à l'intérieur de la surface.
+
+Les équations \Eqno{(3)}~et~\Eqno{(4)} pourront donc se traduire par le théorème
+suivant:
+
+\begin{thm}{III}
+Le solide représentatif correspondant à une portion
+quelconque de la masse fluide serait en équilibre sous l'action des forces
+qui sollicitent cette masse, si l'on appliquait sur chaque élément de la
+surface extérieure, suivant la direction de la vitesse en ce point, et dans
+celui des deux sens qui correspond à l'intérieur de la surface, un effort
+égal à la résistance que cet élément supposé solidifié opposerait au mouvement
+du fluide.
+\end{thm}
+
+De cette proposition découle immédiatement comme corollaire la
+précédente, à savoir que \emph{pour les surfaces de nulle résistance le solide
+représentatif serait en équilibre sous l'action des forces qui sollicitent la
+masse fluide}.
+\DPPageSep{020.png}%
+
+Nous avons vu, en établissant le théorème qui précède, que, si l'on
+considère deux positions infiniment voisines d'une même masse fluide,
+la vitesse normale~$V_n$ sera nulle pour tous les points de leur intersection.
+Il en sera évidemment de même pour le lieu de ces intersections,
+d'où cette nouvelle propriété:
+
+\begin{thm}{IV}
+L'enveloppe des positions successives d'une même
+masse fluide est une surface de nulle résistance.
+\end{thm}
+
+Il est bien entendu d'ailleurs que la surface dont nous parlons n'appartient
+pas forcément à un type géométrique unique et déterminé,
+mais qu'elle pourra se composer de parties appartenant à des types ou
+des individualités distinctes, dont chacune vérifiera séparément la condition
+$V_n = 0$, et rentrera par conséquent dans la catégorie des surfaces
+de nulle résistance.
+
+\marge[DemonstrationAnalytiqueI]{Démonstration analytique.}
+Les théorèmes relatifs au solide représentatif, que nous venons de
+démontrer de deux manières différentes, ont été établis en invoquant
+seulement les principes généraux de la dynamique. Comme ils présentent
+une certaine importance, il ne sera pas indifférent de montrer
+comment on peut aussi les déduire analytiquement des équations du
+mouvement.
+
+Pour cela, rappelons d'abord que les quatre équations communes à tous
+les fluides sont les suivantes:
+\begin{gather*}
+\Tag{(6)}
+\left\{
+\begin{aligned}
+  \frac{1}{\rho}\, \frac{dp}{dx}
+  &= X - u\frac{du}{dx} - v\frac{du}{dy} - w\frac{du}{dz}, \\
+  \frac{1}{\rho}\, \frac{dp}{dy}
+  &= Y - u\frac{dv}{dx} - v\frac{dv}{dy} - w\frac{dv}{dz}, \\
+  \frac{1}{\rho}\, \frac{dp}{dz}
+  &= Z - u\frac{dw}{dx} - v\frac{dw}{dy} - w\frac{dw}{dz};
+\end{aligned} \right. \\
+\Tag{(7)}
+\frac{d · \rho u}{dx} + \frac{d · \rho v}{dy} + \frac{d · \rho w}{dz} = 0,
+\end{gather*}
+dont les trois premières résultent immédiatement du théorème de
+d'Alembert, et la quatrième exprime la continuité de la masse fluide.
+Pour compléter les données du problème, il faudrait y ajouter une
+cinquième équation définissant la nature du fluide; mais cette équation
+\DPPageSep{021.png}%
+n'intéresse pas l'objet que nous avons en vue, et qui doit s'appliquer
+à tous les fluides indistinctement.
+
+Cela posé, multiplions la première des \Eqref[équations]{(6)} par~$\rho$, \Eqref[l'équation]{(7)}
+par~$u$, et ajoutons en faisant passer tous les termes dans le
+second membre, nous obtiendrons ainsi
+\[
+\rho X - \frac{dp}{dx}
+  - \frac{d · \rho u^2}{dx}
+  - \frac{d · \rho u v}{dy}
+  - \frac{d · \rho u w}{dz} = 0;
+\]
+puis, ayant multiplié tous les termes de cette dernière équation
+par $dx\,dy\,dz$, intégrons-les dans l'intérieur d'une surface fermée quelconque,
+le résultat pourra s'indiquer de la façon suivante:
+\begin{multline*}
+\iiint \rho X\, dx\, dy\, dz
+ - \iiint \frac{dp}{dx}\, dx\, dy\, dz
+ - \iiint \frac{d · \rho u^2}{dx}\, dx\, dy\, dz \\
+ - \iiint \frac{d · \rho uv}{dy}\, dx\, dy\, dz
+ - \iiint \frac{d · \rho uw}{dz}\, dx\, dy\, dz = 0.
+\end{multline*}
+
+La première de ces intégrales est ce que nous avons déjà désigné
+sous une notation plus simple par $\opS \varpi X$, c'est-à-dire la somme des projections
+sur l'axe des~$x$ de toutes les forces extérieures appliquées au
+système considéré. Dans chacune des autres intégrales triples, nous
+pourrons effectuer une intégration et écrire, par conséquent, l'équation
+précédente sous la forme suivante:
+\begin{multline*}
+  \opS \varpi X  - \iint (p)_{1}^{2}\, dy\, dz \\
+  - \iint (\rho u^2)_{1}^{2}\, dy\, dz
+  - \iint (\rho u v)_{1}^{2}\, dz\, dx
+  - \iint (\rho u w)_{1}^{2}\, dx\, dy = 0;
+\end{multline*}
+en indiquant, suivant une notation connue, par un crochet affecté de
+deux indices la différence des substitutions correspondant aux deux
+limites de l'intégration.
+
+Or, si nous appelons encore $\alpha$,~$\beta$,~$\gamma$ les angles de la normale intérieure
+avec les axes et $\omega$~un élément de surface, on pourra prendre
+dans ces équations
+\[
+dy\,dz = \omega \cos\alpha,\quad
+dz\,dx = \omega \cos\beta, \quad
+dz\,dx = \omega \cos\gamma,
+\]
+\DPPageSep{022.png}%
+ou bien
+\[
+dy\,dz = -\omega \cos\alpha,\quad
+dz\,dx = -\omega \cos\beta, \quad
+dx\,dy = -\omega \cos\gamma,
+\]
+suivant qu'on entrera dans la surface ou qu'on en sortira, en s'avançant
+à partir de l'élément~$\omega$ dans les directions respectives des~$x$, des~$y$
+et des~$z$, ou, en d'autres termes, suivant que l'élément~$\omega$ appartiendra
+à la portion de la surface à laquelle se rapporte l'indice~$1$, ou à celle
+à laquelle se rapporte l'indice~$2$.
+
+Il suit de là que, si l'on désigne par~$\tsum$ un signe de sommation s'étendant
+à tous les éléments de la surface, l'équation précédente pourra
+s'écrire
+\[
+\opS \varpi X + \tsum \omega p\cos\alpha
++ \tsum \omega\rho u^2\cos\alpha
++ \tsum \omega\rho uv \cos\beta
++ \tsum \omega\rho uw \cos\gamma =0,
+\]
+ou, en réunissant les termes semblables,
+\[
+\opS \varpi X + \tsum \omega p\cos\alpha
++ \tsum \omega\rho u (u\cos\alpha + v\cos\beta + w\cos\gamma) = 0;
+\]
+mais, comme nous avons appelé~$V_n$ la projection de la vitesse sur la
+normale intérieure, nous avons, par définition,
+\[
+V_n = u \cos\alpha + v \cos\beta + w \cos\gamma,
+\]
+et, par conséquent, en reportant dans l'équation précédente, celle-ci
+prendra la forme
+\[
+\opS \varpi X + \tsum \omega p\cos\alpha + \tsum \omega \rho u V_n = 0,
+\]
+ce qui est précisément la première des \Eqref[équations]{(3)}. On obtiendrait
+les deux autres par un calcul tout semblable.
+
+De même, pour obtenir la première des \Eqref[équations]{(4)}, multiplions
+la deuxième des \Eqref[équations]{(6)} par~$z$, la troisième par~$y$, et retranchons
+l'une de l'autre après avoir ajouté de part et d'autre le terme~$vw$, le
+résultat pourra se mettre sous la forme
+\[
+\frac{1}{\rho} \left(z\frac{dp}{dy} - y\frac{dp}{dz}\right)
+= Yz - Zy \\
+- u\frac{d(vz - wy)}{dx}
+- v\frac{d(vz - wy)}{dy}
+- w\frac{d(vz - wy)}{dz}.
+\]
+Puis, multipliant cette dernière équation par~$\rho$, et l'ajoutant à \Eqref[l'équation]{(7)}
+\DPPageSep{023.png}%
+multipliée par le facteur $(vz - wy)$, on formera la suivante:
+\begin{multline*}
+  \rho(Yz - Zy) - \left(z\frac{dp}{dy} - y\frac{dp}{dz}\right) \\
+  - \frac{d · \rho u(vz - wy)}{dx}
+  - \frac{d · \rho v(vz - wy)}{dy}
+  - \frac{d · \rho w(vz - wy)}{dz} = 0,
+\end{multline*}
+qui, par l'intégration dans les mêmes conditions que précédemment,
+conduira à celle-ci:
+\begin{multline*}
+  \opS \varpi (Yz - Zy)
+  + \tsum\omega p(z\cos\beta - y\cos\gamma) \\
+  + \tsum\omega \rho(vz - wy) (u\cos\alpha + v\cos\beta + w\cos\gamma) = 0,
+\end{multline*}
+ou, sous une forme plus abrégée,
+\[
+\opS \varpi (Yz - Zy)
+  + \tsum \omega  p(z\cos\beta - y\cos\gamma)
+  + \tsum \omega \rho(vz - wy) V_n = 0,
+\]
+ce qui est la première des \Eqref[équations]{(4)}, et les deux autres s'obtiendraient
+évidemment d'une façon analogue.
+
+Nous retrouvons ainsi directement par le calcul les équations \Eqno{(3)}~et~\Eqno{(4)}
+qui constituent le \ThmRef{III}\@. Si maintenant nous y introduisons
+la supposition $V_n = 0$, ce qui revient à considérer une portion de
+la masse fluide limitée par des surfaces de nulle résistance, ces
+équations se réduiront par la disparition des derniers termes aux
+suivantes:
+\begin{gather*}
+\begin{aligned}
+  \opS \varpi X + \tsum \omega p \cos\alpha &= 0, \\
+  \opS \varpi Y + \tsum \omega p \cos\beta  &= 0, \\
+  \opS \varpi Z + \tsum \omega p \cos\gamma &= 0,
+\end{aligned}
+\displaybreak[1] \\
+\begin{aligned}
+  \opS \varpi (Yz - Zy) + \tsum\omega p (z\cos\beta  - y\cos\gamma) &= 0, \\
+  \opS \varpi (Z x-X z) + \tsum\omega p (x\cos\gamma - z\cos\alpha) &= 0, \\
+  \opS \varpi (X y-Y x) + \tsum\omega p (y\cos\alpha - x\cos\beta)  &= 0,
+\end{aligned}
+\end{gather*}
+lesquelles coïncident exactement avec le \Eqref[système]{(2)}, ainsi que nous
+avons eu déjà occasion de le remarquer (\Pageref{EquationsDeux}).
+
+On retrouve donc en même temps, par le calcul, la propriété caractéristique
+des surfaces de nulle résistance exprimée par le \ThmRef{II},
+et c'est ainsi qu'au début de nos recherches nous avions établi cette
+\DPPageSep{023.png}%
+propriété dans une Note insérée aux \textit{Comptes rendus de l'Académie des
+Sciences} (t.~XL, séance du 29~mai 1865).
+
+Voyons maintenant comment on déterminera les surfaces de nulle
+résistance.
+
+
+\Section{II.}{ --- Recherche Analytique des Surfaces de Nulle Résistance.}
+{Équation aux Différences Partielles. --- Solutions
+Complètes. --- Équation Générale en Termes Finis.}
+
+\marge[EquationDifferencesPartielles]{Équation\\aux différences\\partielles.}
+La définition que nous avons donnée des surfaces de nulle résistance
+est susceptible d'une traduction analytique fort simple. En effet, en
+désignant, suivant l'usage, par $p$~et~$q$ les dérivées partielles $\dfrac{dz}{dx}$ et $\dfrac{dz}{dy}$
+il faudra exprimer que, pour une pareille surface, la normale dont les
+cosinus sont proportionnels à $\mathrm{p}$,~$\mathrm{q}$ et~$-1$ est perpendiculaire à la
+droite dont les cosinus sont proportionnels à $u$,~$v$,~$w$, ce qui donne
+immédiatement l'équation
+\[
+\Tag{(8)}
+ u\mathrm{p} + v\mathrm{q} = w,
+\]
+équation aux différences partielles du premier ordre qui s'intégrera
+par les procédés habituels.
+
+Pour obtenir l'équation en $x$,~$y$,~$z$, il faudra donc préalablement
+connaître les expressions de $u$,~$v$,~$w$ à l'aide de ces mêmes variables,
+et, comme l'intégration des équations du mouvement est en général
+impossible, il semble tout d'abord qu'il n'y ait pas lieu de rechercher
+une équation générale qui convienne à ces surfaces.
+
+On aurait tort de s'arrêter là néanmoins, car il est possible que les
+équations de ces surfaces puissent s'exprimer à l'aide des éléments $u$,~$v$,~$w$,
+$p$,~$\rho$, ou tout autre défini à l'avance, sans qu'il soit nécessaire de
+connaître leur détermination en $x$,~$y$ et~$z$; et il y aurait dès lors intérêt,
+au point de vue géométrique, à connaître cette expression, bien qu'elle
+ne se prêtât à aucune application numérique. C'est pourquoi, au lieu
+de rechercher la solution générale de l'équation ci-dessus, laquelle
+doit renfermer une fonction arbitraire, nous envisagerons d'abord les
+\DPPageSep{025.png}%
+solutions particulières, connues sous le nom de \emph{solutions  complètes}, c'est-à-dire
+celles qui renferment seulement une constante arbitraire, et qui,
+par conséquent, peuvent être mises sous la forme
+\[
+\Phi(x,y,z) = \const,
+\]
+où $\Phi$~est une fonction parfaitement déterminée, mais actuellement
+inconnue, que nous allons nous proposer de rechercher.
+
+Pour cela, nous déduirons de cette dernière équation les valeurs
+de~$p$ et de~$q$, et nous les reporterons dans \Eqref[l'équation]{(8)}, ce qui nous
+donnera la suivante:
+\[
+\Tag{(9)}
+u\frac{d\Phi}{dx} + v\frac{d\Phi}{dy} + w\frac{d\Phi}{dz} = 0,
+\]
+ainsi que nous aurions pu d'ailleurs l'écrire immédiatement.
+
+\marge[InterpretationMecanique]{Interprétation\\mécanique\\de cette équation.}
+Or cette seconde forme, outre sa symétrie, a un avantage considérable:
+elle exprime immédiatement une propriété importante du mouvement,
+à savoir que l'élément caractérisé par la fonction $\Phi(x,y,z)$
+conserve invariablement la même grandeur pour une même molécule.
+En effet, le temps n'entrant pas explicitement dans la fonction~$\Phi$, sa
+dérivée totale, prise en considérant $x$,~$y$,~$z$ comme des fonctions de~$t$,
+sera
+\[
+\left(\frac{d\Phi}{dt}\right)
+  = \frac{d\Phi}{dx}\, \frac{dx}{dt}
+  + \frac{d\Phi}{dy}\, \frac{dy}{dt}
+  + \frac{d\Phi}{dz}\, \frac{dz}{dt}\quad\footnotemark,
+\]
+\Pagelabel{TermeParentheses}%
+\footnotetext{Nous écrivons ce terme entre parenthèses pour marquer une dérivée totale prise par
+  rapport au temps, lequel n'entre explicitement dans aucune des expressions considérées.}%
+ce qui n'est autre chose que le premier membre de \Eqref[l'équation]{(9)}, en
+raison des définitions admises
+\[
+\Tag{(10)}
+u = \frac{dx}{dt},\quad v = \frac{dy}{dt},\quad w = \frac{dz}{dt},
+\]
+et, par conséquent, la fonction~$\Phi$ considérée pour une même molécule
+ne varie pas avec le temps.
+
+La question est donc réduite à rechercher quels sont les éléments
+\DPPageSep{026.png}%
+caractéristiques d'une molécule qui restent invariables dans son mouvement.
+
+\marge[PremiereSolution]{Première solution complète.}
+Il en est un tout d'abord qui se présente tout naturellement à l'esprit:
+c'est sa masse; et il résulte immédiatement de ce qui précède
+qu'en égalant son expression à une constante nous obtiendrons une
+première famille de surfaces de nulle résistance.
+
+\marge[CasLiquides]{Cas des liquides.}
+En effet, si le fluide est incompressible, la molécule qui occupe
+actuellement le volume~$\vol$ conservera indéfiniment ce même volume;
+il s'ensuit qu'en un point quelconque de sa trajectoire sa masse aura
+pour expression~$\vol\rho$, laquelle expression devra, en vertu de la remarque
+faite plus haut, vérifier \Eqref[l'équation différentielle]{(9)}, et l'on doit avoir
+par conséquent, en supprimant le facteur constant~$\vol$, l'équation
+\[
+\Tag{(11)}
+u\frac{d\rho}{dx} + v\frac{d\rho}{dy} + w\frac{d\rho}{dz} = 0,
+\]
+qui est bien effectivement une des équations du problème dans le cas
+des liquides hétérogènes.
+
+Il suit de là que l'équation
+\[
+\Tag{(12)}
+\rho = \const
+\]
+est alors une des solutions cherchées, et que, par conséquent, les \emph{surfaces
+d'égale densité} constituent dans ce cas une première famille de
+surfaces de nulle résistance.
+
+\marge[CasFluides]{Cas des fluides compressibles.}
+Si, au contraire, le fluide est compressible, la molécule qui occupe
+actuellement le volume infiniment petit~$\vol$ occupera, au bout d'un
+certain temps, le volume $\vol' = \vol(1 + \Delta)$, la quantité~$\Delta$, qui peut être
+positive ou négative, mesurant la dilatation relative au déplacement
+considéré. Or, comme il y a intérêt à pouvoir comparer les dilatations
+correspondant à divers déplacements de la même molécule, ou même
+des différentes molécules entre elles, il convient de compter ces déplacements
+et les dilatations auxquelles ils donnent lieu, à partir d'une
+position définie pour chaque molécule, par exemple à partir de son
+passage sur une même surface, arbitrairement choisie, qui rencontre
+\DPPageSep{027.png}%
+toutes les trajectoires fluides, et que nous pourrons appeler, à cause
+de cela, \emph{surface origine des dilatations}.
+
+\marge[DefinitionDilatation]{Définition de la dilatation.}
+Nous définirons donc la quantité $\Delta$ par cette condition que, $\vol_0$~étant
+le volume de la molécule lors de son passage sur cette surface, son
+volume en un point quelconque de sa trajectoire soit exprimé par la
+quantité
+\[
+\Tag{(13)}
+\vol = \vol_0 (1 + \Delta),
+\]
+qu'il s'agisse de positions antérieures ou postérieures à son passage sur
+cette surface. La quantité~$\Delta$, que nous appellerons \emph{dilatation}, aura alors
+une valeur parfaitement déterminée en chaque point, et nous montrerons
+tout à l'heure comment on obtiendra son expression en $x$,~$y$ et~$z$;
+mais on comprend dès maintenant que la connaissance de cette fonction
+permettra d'apprécier les dilatations correspondant à un déplacement
+quelconque; car, si nous considérons successivement deux
+positions de la même molécule, où les volumes soient respectivement
+$\vol$~et~$\vol'$, et les dilatations $\Delta$~et~$\Delta'$, des deux équations
+\[
+\vol  = \vol_0 (1 + \Delta) \quad\text{et}\quad
+\vol' = \vol_0 (1 + \Delta'),
+\]
+on tirera sans difficulté
+\[
+\vol' - \vol = \vol_0 (\Delta' - \Delta),
+\]
+et par conséquent\Pagelabel{page:23}
+\[
+\frac{\vol' - \vol}{\vol}
+  = \frac{\Delta' - \Delta}{1 + \Delta},
+\]
+rapport qui exprime la dilatation correspondant au déplacement
+considéré.
+
+Il convient en même temps de préciser le sens que nous devons attacher
+au mot \emph{molécule}, que nous avons employé jusqu'ici pour désigner
+une portion quelconque infiniment petite de la masse fluide; car, du
+moment que nous nous proposons de trouver une expression de la
+masse moléculaire en chaque point, il importe de définir comment
+nous comprenons la division de la masse fluide en portions infiniment
+petites, auxquelles nous attribuons le nom de \emph{molécules}. C'est ce que
+nous ferons, en entendant désormais par ce mot «\;\emph{toute portion de la
+\DPPageSep{028.png}%
+masse fluide qui occupait un même volume infiniment petit~$\vol_0$, lors de son
+passage sur la surface prise pour origine des dilatations}.\;» Il est évident,
+d'ailleurs, que cette définition correspondrait, pour le cas des liquides,
+à la division de la masse en volumes infiniment petits, tous égaux à~$\vol_0$.
+
+\marge[ExpressionMasseMoleculaire]{Expression\\de la\\masse moléculaire.}
+À l'aide de ces deux conventions, le volume de la molécule étant
+exprimé en un point quelconque par la quantité $\vol_0(1 + \Delta)$, sa masse\Pagelabel{MasseMoleculaire}
+le sera de même par la quantité $\rho \vol_0(1 + \Delta)$, $\rho$~et~$\Delta$ étant les valeurs
+de la densité et de la dilatation relatives à ce point. Cette quantité
+devant demeurer constante dans le mouvement de la molécule, il s'ensuit
+qu'on devra avoir, comme nous l'avons déjà expliqué,
+\[
+u\frac{d · \rho \vol_0(1 + \Delta)}{dx} +
+v\frac{d · \rho \vol_0(1 + \Delta)}{dy} +
+w\frac{d · \rho \vol_0(1 + \Delta)}{dz} = 0,
+\]
+ou, en supprimant le facteur commun~$\vol_0$,
+\[
+\Tag{(14)}
+u\frac{d · \rho(1 + \Delta)}{dx} +
+v\frac{d · \rho(1 + \Delta)}{dy} +
+w\frac{d · \rho(1 + \Delta)}{dz} = 0.
+\]
+
+Cette équation donne lieu aux observations suivantes:
+
+En premier lieu, la dilatation~$\Delta$, dont la connaissance permet seule
+d'apprécier les variations de volume éprouvées par les différentes parties
+de la masse fluide, doit être considérée comme une nouvelle fonction
+inconnue de $x$,~$y$ et~$z$, analogue aux fonctions $u$,~$v$,~$w$, $p$~et~$\rho$, qui
+figurent dans les équations \Eqno{(6)}~et~\Eqno{(7)}, et l'équation précédente, analogue
+à \Eqref[l'équation]{(11)} dans le cas des liquides, est précisément celle
+qui permettra d'arriver à sa détermination\footnotemark;
+\setlength{\TmpLen}{\parindent}%[** TN: Save manually for use in \footnotetext]
+\footnotetext{\setlength{\parindent}{\TmpLen}Si l'on développe \Eqref[l'équation]{(14)} de la façon suivante:
+  \[
+  \frac{1}{1 + \Delta}
+  \left[ u\frac{d(1 + \Delta)}{dx}
+    +    v\frac{d(1 + \Delta)}{dy}
+    +    w\frac{d(1 + \Delta)}{dz} \right]
+  = -\frac{1}{\rho}
+  \left(u\frac{d\rho}{dx}
+    +   v\frac{d\rho}{dy}
+    +   w\frac{d\rho}{dz} \right),
+  \]
+  et qu'on la rapproche de \Eqref[l'équation]{(7)} préparée de la même
+  manière, c'est-à-dire mise sous la forme
+  \[
+  \frac{du}{dx} + \frac{dv}{dy} + \frac{dw}{dz}
+  = -\frac{1}{\rho}
+  \left(u\frac{d\rho}{dx}
+    +   v\frac{d\rho}{dy}
+    +   w\frac{d\rho}{dz} \right),
+  \]
+  % [** TN: Next line indented in original]
+  obtiendra immédiatement par comparaison la suivante:
+  \[
+  \Tag[(14bis)]{(14 \textit{bis})}
+    u\frac{d · l(1 + \Delta)}{dx}
+  + v\frac{d · l(1 + \Delta)}{dy}
+  + w\frac{d · l(1 + \Delta)}{dz}
+  = \frac{du}{dx} + \frac{dv}{dy} + \frac{dw}{dz},
+  \]
+  qui ne diffère de celle donnée par Cauchy (réduite au cas du mouvement permanent) que par
+  le changement de~$\Delta$ en~$l(1 + \Delta)$, et se confond par conséquent avec elle, si l'on suppose~$\Delta$ très-petit
+  (voir \textit{Exercices de Mathématiques}, t.~III, p.~130).
+
+  Cette hypothèse est effectivement contenue dans les raisonnements que présente l'illustre
+  géomètre pour établir cette équation, bien qu'il ne l'énonce pas explicitement.
+
+  Pour le montrer, adoptons, pour un instant, ses notations, c'est-à-dire désignons, non plus
+  par~$\Delta$, mais par~$\upsilon$ la \emph{dilatation} que nous nous proposons de déterminer, et par~$\Delta$ une simple
+  caractéristique de différentiation. La fonction~$\upsilon$, pour avoir un sens, devra nécessairement
+  exprimer une grandeur comptée pour chaque molécule à partir d'une position fixe et déterminée
+  $(x_0, y_0, z_0)$; il en résulte que la dilatation correspondant à un déplacement fini, compté
+  à partir d'un point quelconque $(x, y, z)$ jusqu'à un point $(x', y', z')$, sera exprimée par le
+  rapport $\dfrac{\upsilon' - \upsilon}{1 + \upsilon}$, ainsi que nous l'avons établi, \Pageref[page]{page:23}; d'où il suit que la \emph{dilatation instantanée},
+  c'est-à-dire celle correspondant à un déplacement infiniment petit quelconque aura pour
+  expression
+  \[
+  \Tag[(14ter)]{(14 \textit{ter})}
+  \theta\, \Delta t = \frac{\Delta \upsilon}{1 + \upsilon},
+  \]
+  et l'on ne pourrait prendre $\theta\, \Delta t = \Delta\upsilon$, comme le fait Cauchy, que pour le premier instant, à
+  partir de la position prise pour origine, ou à la condition de supposer $\upsilon$ constamment très-petit.
+
+  Si l'on n'admet pas cette hypothèse, les raisonnements formulés par Cauchy conduisent
+  alors avec la valeur~\Eqno[(14ter)]{(14~\textit{ter})} à l'équation ci-dessus~\Eqno[(14bis)]{(14~\textit{bis})}, qui concorde parfaitement, comme
+  nous venons de le voir, avec \Eqref[l'équation]{(14)}, à laquelle nous avons été conduit par une autre
+  méthode.}
+car, si l'on suppose
+connue l'expression de $u$,~$v$,~$w$ et~$\rho$, à l'aide des équations \Eqno{(6)}~et~\Eqno{(7)},
+$\Delta$~sera déterminé par la condition de vérifier \Eqref[l'équation]{(14)}, et, en
+\DPPageSep{029.png}%
+outre, de se réduire à zéro tout le long de la surface prise pour origine
+des dilatations. On peut dire de la sorte que le problème du mouvement
+d'un fluide comporte dans tous les cas la détermination de cinq
+inconnues, à l'aide des cinq équations \Eqno{(6)},~\Eqno{(7)} et~\Eqno{(14)}, puisque, dans
+le cas des liquides, la dilatation disparaissant, les équations \Eqno{(11)}~et~\Eqno{(14)}
+se confondent, et que, dans le cas des fluides compressibles, la pression
+et la densité étant fonction l'une de l'autre ne forment plus à proprement
+parler qu'une seule inconnue.
+
+\marge[SurfacesEgaleMasse]{Surfaces\\d'égale masse.}
+En second lieu, \Eqref[l'équation]{(14)} exprime que l'équation
+\[
+\Tag{(15)}
+\rho(1 + \Delta) = \const
+\]
+satisfait à \Eqref[l'équation]{(9)}, c'est-à-dire à l'équation différentielle des surfaces
+\DPPageSep{030.png}%
+de nulle résistance. Or, si l'on suppose dans cette équation $\rho$~et~$\Delta$
+exprimés en $x$,~$y$,~$z$, on aura une famille de surfaces telles, que la
+masse moléculaire, dont nous avons donné tout à l'heure l'expression
+(\Pageref{MasseMoleculaire}), aura la même grandeur en tous les points d'une même
+surface, et qu'on pourra conséquemment appeler \emph{surfaces d'égale masse
+moléculaire}, ou simplement \emph{surfaces d'égale masse}. D'ailleurs, \Eqref[l'équation]{(15)}
+se réduisant à \Eqref[l'équation]{(12)} par la supposition $\Delta = 0$, la
+solution relative au cas des liquides se trouve comprise dans celle-ci,
+en sorte que l'on peut dire, dans tous les cas, que les \emph{surfaces d'égale
+masse}, représentées par \Eqref[l'équation]{(15)}, constituent une première famille
+de surfaces de nulle résistance.
+
+\marge{Définitions:}
+Avant d'en montrer une seconde, nous allons compléter les définitions
+qui précèdent par deux autres qui s'y rattachent immédiatement.
+
+\marge[DefinitionVolumePrimitif]{(\textit{a}) du volume\\primitif,}
+D'abord il résulte de \Eqref[l'équation]{(13)} que la molécule qui occupe
+actuellement le volume~$\vol$ occupait, lors de son passage sur la surface
+origine des dilatations, le volume
+\[
+\vol_0 = \frac{\vol}{1 + \Delta},
+\]
+qu'on peut appeler en raison de cela son volume primitif. Étendant
+cette même locution à une portion finie quelconque de la masse fluide,
+nous appellerons \emph{volume primitif}\Pagelabel{VolumePrimitif} de cette masse la somme des volumes
+primitifs de tous les éléments qui la composent, ou, en d'autres termes,
+l'intégrale $\ds\iiint\frac{dx\,dy\,dz}{1 + \Delta}$ étendue à tout le volume actuel de la masse
+considérée; on voit que ce volume est précisément celui qu'occuperait
+cette masse, si chacun des éléments qui la composent avait conservé
+le volume qu'il occupait lors de son passage sur la surface origine des
+dilatations.
+
+\marge[DefinitionDilatationTotale]{(\textit{b}) de la dilatation\\totale.}
+En second lieu, l'accroissement de volume subi par la molécule,
+depuis son passage sur la surface origine des dilatations jusqu'à sa
+position actuelle, est mesuré par la différence
+\[
+\vol - \vol_0
+  = \vol - \frac{\vol}{1 + \Delta}
+  = \vol \left(1 - \frac{1}{1 + \Delta}\right)
+  = \vol \frac{\Delta}{1 + \Delta}.
+\]
+\DPPageSep{031.png}%
+
+La somme des accroissements analogues correspondant à tous les
+éléments d'une portion finie de la masse sera ce que nous appellerons
+la \emph{dilatation totale}\Pagelabel{DilatationTotale} de cette masse. On voit qu'elle aura pour expression
+l'intégrale $\ds\iiint \frac{\Delta}{1 + \Delta}\, dx\, dy\, dz$ étendue à tout le volume de la masse
+considérée, et qu'elle exprime la différence entre son volume actuel et
+ce que nous avons appelé son \emph{volume primitif}.
+
+Ces définitions posées, poursuivons maintenant la recherche des surfaces
+de nulle résistance.
+
+\marge[DeuxiemeSolution]{Deuxième solution complète.}
+Il existe un autre élément caractéristique de la molécule, qui reste
+invariable pendant le mouvement, et qui, par conséquent, devra fournir
+une nouvelle solution de \Eqref[l'équation]{(9)}, c'est l'\emph{énergie}; car cette
+expression, empruntée à la théorie mécanique de la chaleur, est définie
+précisément par cet énoncé du théorème des forces vives que, \emph{dans le
+mouvement d'un point matériel, son énergie reste constante}. Nous n'aurons
+donc qu'à former l'équation des forces vives pour la molécule
+fluide, et, en égalant à un paramètre arbitraire l'ensemble des termes
+variables (ou énergie moléculaire), nous aurons une nouvelle famille
+de surfaces de nulle résistance.
+
+Or, si l'on conserve les notations déjà employées, celle équation est
+la suivante:
+\[
+\frac{1}{2}\, m (V^2 - V_0^2)
+  = \int_0^t m (\scrX\, dx + \scrY\, dy + \scrZ\, dz),
+\]
+en affectant de l'indice o les termes relatifs à la position initiale.
+
+La force totale qui sollicite la molécule, et dont les composantes
+figurent dans cette équation, se compose, comme l'on sait, de deux
+éléments: les forces extérieures qui s'exercent sur toute sa masse, et
+dont nous avons déjà représenté les composantes par $mX$,~$mY$,~$mZ$,
+et les forces intérieures ou pressions qui s'exercent sur la surface de
+la molécule seulement. Le procédé par lequel on évalue ces dernières
+forces est fort connu; nous ne le rappellerons donc pas ici, et nous
+poserons immédiatement
+\[
+m\scrX = m\left(X - \frac{1}{\rho}\, \frac{dp}{dx} \right),\quad
+m\scrY = m\left(Y - \frac{1}{\rho}\, \frac{dp}{dy} \right),\quad
+m\scrZ = m\left(Z - \frac{1}{\rho}\, \frac{dp}{dz} \right);
+\]
+\DPPageSep{032.png}%
+car c'est précisément en égalant ces composantes à zéro que l'on obtient
+les équations d'équilibre des fluides.
+
+Si l'on substitue ces valeurs dans l'équation qui précède, on pourra
+faire sortir du signe~$\ds\int$ le facteur~$m$, qui est, par hypothèse, constant
+par rapport au temps, ce qui donnera l'équation
+\[
+\frac{1}{2}\, m\left(V^2  - V_0^2 \right)
+  = m\int_0^t \left[
+      \left( X  - \frac{1}{\rho}\, \frac{dp}{dx} \right) dx
+    + \left( Y  - \frac{1}{\rho}\, \frac{dp}{dy} \right) dy
+    + \left( Z  - \frac{1}{\rho}\, \frac{dp}{dz} \right) dz
+  \right],
+\]
+ou, sous une forme plus concise,
+\[
+\Tag{(16)}
+\frac{1}{2}\, m(V^2  - V_0^2) = m(q - q_0),
+\]
+en posant, pour simplifier l'écriture,
+\[
+q = \int \left[
+    \left(X  - \frac{1}{\rho}\, \frac{dp}{dx} \right) dx
+  + \left(Y  - \frac{1}{\rho}\, \frac{dp}{dy} \right) dy
+  + \left(Z  - \frac{1}{\rho}\, \frac{dp}{dz} \right) dz
+\right],
+\]
+ou, ce qui revient au même,
+\[
+q = \int (X\, dx + Y\, dy + Z\, dz)
+  - \int \frac{1}{\rho}
+    \left(\frac{dp}{dx}\, dx
+        + \frac{dp}{dy}\, dy
+        + \frac{dp}{dz}\, dz \right).
+\]
+
+Or, si l'on considère les différentielles totales correspondant à un
+accroissement du temps~$dt$, et que l'on suppose, suivant l'usage, que
+les composantes des forces extérieures soient les dérivées partielles
+d'une même fonction $F(x, y, z)$, on aura
+\[
+\Tag{(17)}
+\left\{
+  \begin{aligned}
+   \frac{dp}{dx}\, dx + \frac{dp}{dy}\, dy + \frac{dp}{dz}\, dz &= dp, \\
+   X\, dx + Y\, dy + Z\, dz &= dF,
+ \end{aligned}
+\right.
+\]
+de sorte que la fonction~$q$, à laquelle nous donnerons tout à l'heure un
+nom, pourra s'écrire simplement
+\[
+\Tag{(18)}
+q = F(x, y, z) - \int \frac{dp}{\rho},
+\]
+et il n'y aura qu'à substituer cette expression dans \Eqref[l'équation]{(16)}
+pour avoir l'équation des forces vives.
+\DPPageSep{033.png}%
+
+Il est à remarquer que l'intégrale qui figure dans cette dernière
+expression peut toujours s'exprimer en termes finis; car, d'une part, si
+le fluide est incompressible, le facteur~$\rho$ étant alors constant par rapport
+au temps pourra sortir du signe~$\ds\int$, en sorte que l'intégrale se réduira
+simplement à~$\dfrac{p}{\rho}$; et si, d'autre part, le fluide est compressible,
+la densité étant alors liée à la pression par une équation de la forme
+$\rho = f(p)$, l'intégrale $\ds\int \frac{dp}{\rho}$ a alors un sens parfaitement déterminé\Pagelabel{SensIntegrale},
+qu'on peut supposer exprimé par une fonction finie~$\scrF(p)$. On voit
+d'ailleurs que, pour l'intelligence de la formule~(18), on peut faire
+abstraction de la considération du temps qui a servi à l'établir, et supposer
+dès lors que les signes $\ds\int$~et~$d$ qui y figurent se rapportent simplement
+à la variable~$p$, considérée pour un instant comme variable indépendante;
+car on obtient de cette façon pour la valeur de~$q$ les
+mêmes expressions que nous venons d'établir. L'expression~(18) de~$q$
+prend alors une signification intrinsèque parfaitement précise, qui est
+celle que nous lui attribuerons désormais.
+
+\marge{Définitions:}
+Cela posé, arrêtons-nous quelques instants sur cette \Eqref[équation]{(16)},
+pour établir encore quelques définitions qui nous seront utiles dans le
+paragraphe suivant:
+
+\marge[DefinitionForceVive]{(\textit{a}) de la force vive,}
+\primo Le premier membre de cette équation représentant le demi-accroissement
+de la force vive de la molécule de masse~$m$ dans le déplacement
+considéré, la force vive moléculaire a pour expression en
+un point quelconque~$mV^2$, et la somme d'expressions analogues correspondant
+à tous les éléments d'une portion finie du fluide constituerait
+la force vive totale\Pagelabel{ForceViveI} de cette masse; mais, afin de n'introduire dans
+notre analyse que des quantités finies, nous considérerons, au lieu et
+place de la force vive moléculaire, son rapport à la masse moléculaire~$m$,
+c'est-à-dire la quantité
+\[
+\Tag{(19)}
+V^2 = u^2 + v^2 + w^2,
+\]
+que nous appellerons \emph{force vive au point} $(x, y, z)$, ou simplement la
+\emph{force vive}, de même que, dans l'évaluation des pressions, on appelle
+\DPPageSep{034.png}%
+\emph{pression au point} $(x, y, z)$ le rapport de la pression effective qui s'exerce
+sur un élément situé en ce point à l'aire de cet élément.
+
+D'ailleurs, la force vive moléculaire relative à un élément de masse
+quelconque $\varpi = \rho\, dx\, dy\, dz$ ayant ainsi pour expression
+\[
+\varpi V^2 = \rho V^2\, dx\, dy\, dz,
+\]
+la \emph{force vive totale}\Pagelabel{ForceViveII} correspondant à une portion déterminée du fluide
+sera exprimée par la somme
+\[
+\opS \varpi V^2 = \iiint \rho V^2\, dx\, dy\, dz,
+\]
+étendue à tout le volume de cette portion du fluide.
+
+\marge[DefinitionTravail]{(\textit{b}) du travail,}
+\secundo Le second membre de cette même \Eqref[équation]{(16)} exprime le travail
+accompli par la molécule~$m$ dans son déplacement. La quantité
+que nous avons appelée~$q$ étant une fonction parfaitement déterminée
+en $x$,~$y$ et~$z$, il suit de là que, si nous considérons l'ensemble des points
+$(x_0, y_0, z_0)$ qui satisfont à l'équation $q_{0} = 0$, le second membre de
+\Eqref[l'équation]{(16)}, qui se réduit alors à~$mq$, représentera le travail produit
+par la molécule de masse~$m$ en arrivant à sa position actuelle, à
+partir de son passage sur la surface $q_{0} = 0$, que nous appellerons à
+cause de cela \emph{surface origine du travail}. Si donc nous convenons de
+ne considérer que des déplacements comptés à partir de cette surface,
+le travail moléculaire aura pour expression~$mq$; et, si nous nous laissons
+guider par les mêmes considérations que précédemment à propos
+de la force vive, la quantité~$q$ pourra s'appeler le \emph{travail au point}
+$(x, y, z)$, ou simplement le \emph{travail}. Une somme de travaux moléculaires
+pris dans les mêmes conditions, ou, en d'autres termes, l'intégrale
+\[
+\opS \varpi q = \iiint q\rho\, dx\, dy\, dz,
+\]
+étendue à tout l'intérieur d'une surface quelconque, sera par ailleurs
+ce que nous appellerons le \emph{travail total}\Pagelabel{TravailTotal} correspondant à cette surface.
+
+\marge[DefinitionEnergie]{(\textit{c}) de l'énergie.}
+\tertio Enfin, si l'on sépare dans \Eqref[l'équation]{(16)} les termes variables des
+termes constants, en l'écrivant de la façon suivante:
+\[
+\Tag{(20)}
+m\left(\tfrac{1}{2} V^2 - q\right) = m\left(\tfrac{1}{2} V_0^2 - q_0\right),
+\]
+\DPPageSep{035.png}%
+le premier membre sera ce que dans la théorie de la chaleur on appellerait
+l'\emph{énergie moléculaire}, et la somme d'expressions analogues, correspondant
+à tous les éléments d'un système, serait l'énergie du système.
+Adoptant donc cette locution et agissant comme nous l'avons
+fait pour la force vive et le travail, nous considérerons plus spécialement
+le rapport de l'énergie moléculaire à la masse moléculaire, c'est-à-dire
+la fonction
+\[
+\Tag{(21)}
+\varphi = \tfrac{1}{2} V^2 - q,
+\]
+que nous appellerons \emph{énergie au point} $(x, y, z)$, ou simplement \emph{énergie};
+et l'\emph{énergie totale}\Pagelabel{EnergieTotale}, correspondant à une partie définie du fluide, sera
+de même l'intégrale
+\[
+\opS \varpi\varphi = \iiint \varphi\rho\, dx\, dy\, dz,
+\]
+étendue à tout le volume de la masse considérée.
+
+Si l'on remplace d'ailleurs, dans \Eqref[l'équation de définition]{(21)}, $q$~et~$V^2$
+par leurs valeurs \Eqno{(18)}~et~\Eqno{(19)}, l'énergie~$\varphi$ sera exprimée au moyen des
+éléments habituellement considérés de la façon suivante:
+\[
+\Tag{(22)}
+\varphi = \tfrac{1}{2} ( u^2 + v^2 + w^2) - F(x, y, z) + \int \frac{dp}{\rho}.
+\]
+
+\marge[SurfacesEgaleEnergie]{Surfaces\\d'égale énergie.}
+Ces nouvelles définitions étant admises, revenons à l'objet que nous
+avons plus particulièrement en vue dans ce paragraphe, qui est la recherche
+des surfaces de nulle résistance.
+
+Si l'on divise par~$m$ les deux membres de \Eqref[l'équation]{(20)}, cette équation
+pourra s'écrire
+\[
+\tfrac{1}{2} V^2 - q = \tfrac{1}{2} V_0^2 - q_0,
+\]
+ou plus simplement, à l'aide de la notation que nous venons d'adopter,
+\[
+\Tag{(23)}
+\varphi = \const,
+\]
+la fonction~$\varphi$ étant définie par les équations \Eqno{(21)}~ou~\Eqno{(22)}.
+
+Si d'ailleurs on différentie cette dernière équation par rapport au
+\DPPageSep{036.png}%
+temps, on aura, en vertu des \Eqref[équations]{(10)}
+\[
+\Tag{(24)}
+\left(\frac{d\varphi}{dt}\right)
+  = u \frac{d\varphi}{dx}
+  + v \frac{d\varphi}{dy}
+  + w \frac{d\varphi}{dz} = 0\footnotemark,
+\]
+\footnotetext{Même remarque qu'à la \Pageref[page]{TermeParentheses}.}%
+c'est-à-dire que \Eqref[l'équation]{(23)} vérifiera \Eqref[l'équation différentielle]{(9)};
+et par conséquent, en considérant~$\varphi$ comme une fonction déterminée
+de $x$,~$y$ et~$z$, la famille de surfaces représentée par cette équation, que
+l'on peut appeler \emph{surfaces d'égale énergie}, constituera une deuxième
+famille de surfaces de nulle résistance.
+
+\marge[IntegraleForcesVives]{Intégrale\\des forces vives.}
+Avant de déduire des résultats que nous avons déjà acquis les conséquences
+qu'ils renferment, revenons un instant sur ce qui précède
+pour établir d'une autre façon l'équation si importante des \emph{forces vives}.
+Nous l'avons formée immédiatement tout à l'heure, en appliquant le
+théorème du travail au mouvement de la molécule fluide; mais on sait
+que cette équation est une intégrale des équations du mouvement,
+toutes les fois que le temps n'entre pas explicitement dans l'expression
+des liaisons. Cette condition étant évidemment remplie dans le
+cas actuel, par suite de l'hypothèse de la permanence, il y a intérêt
+à montrer comment on peut obtenir analytiquement cette équation par
+l'intégration directe des équations du mouvement: c'est ce que nous
+allons faire en peu de mots.
+
+Pour cela il faut, comme l'on sait, multiplier les équations du mouvement
+respectivement par $dx$,~$dy$,~$dz$ et faire la somme, et l'on doit
+arriver ainsi à une différentielle exacte; mais, dans le cas actuel, cette
+forme n'apparaît pas immédiatement, parce que, pour établir les \Eqref[équations]{(6)},
+on a remplacé partout dans l'expression des forces d'inertie
+$\dfrac{dx}{dt}$ par~$u$, $\dfrac{dy}{dt}$ par~$v$, $\dfrac{dz}{dt}$ par~$w$, il faut donc, pour que cette forme apparaisse,
+rétablir à la place de $u$,~$v$,~$w$ leurs valeurs~(10), ou, ce qui
+revient au même, remplacer dans le calcul $dx$,~$dy$,~$dz$ par leurs valeurs
+\[
+dx = u\, dt,\quad dy = v\, dt,\quad dz = w\, dt;
+\]
+d'où, en conséquence, la série d'opérations suivantes.
+\DPPageSep{037.png}%
+
+Multiplions les \Eqref[équations]{(6)} respectivement par $u\, dt$, $v\, dt$, $w\, dt$, et
+ajoutons en rapprochant les termes situés sur une même colonne verticale,
+et, faisant ressortir les facteurs communs, nous obtiendrons
+ainsi
+\begin{align*}%[** TN: Re-breaking this display and next]
+\frac{1}{\rho} \left(
+  \frac{dp}{dx} u\, dt + \frac{dp}{dy} v\, dt + \frac{dp}{dz} w\, dt
+  \right)
+  &= Xu\, dt + Yv\, dt + Zw\, dt \\
+  &\quad -u\left(u\frac{du}{dx} + v\frac{dv}{dx} + w\frac{dw}{dx}\right) dt \\
+  &\quad -v\left(u\frac{du}{dy} + v\frac{dv}{dy} + w\frac{dw}{dy}\right) dt \\
+  &\quad -w\left(u\frac{du}{dz} + v\frac{dv}{dz} + w\frac{dw}{dz}\right) dt,
+\end{align*}
+ou, en remettant à présent $dx$,~$dy$,~$dz$ à la place de leurs valeurs $u\, dt$,
+$v\, dt$, $w\, dt$,
+\begin{align*}
+\frac{1}{\rho} \left(
+  \frac{dp}{dx}\, dx + \frac{dp}{dy}\, dy + \frac{dp}{dz}\, dz
+  \right)
+  &= X\, dx + Y\, dy + Z\, dz \\
+  &\quad -\left(u\frac{du}{dx} + v\frac{dv}{dx} + w\frac{dw}{dx}\right) dx \\
+  &\quad -\left(u\frac{du}{dy} + v\frac{dv}{dy} + w\frac{dw}{dy}\right) dy \\
+  &\quad -\left(u\frac{du}{dz} + v\frac{dv}{dz} + w\frac{dw}{dz}\right) dz,
+\end{align*}
+
+Si nous représentons maintenant par la caractéristique~$d$ une différentielle
+totale prise en considérant $x$,~$y$,~$z$ comme des fonctions de la
+variable indépendante~$t$, et que nous ayons égard aux \Eqref[équations]{(17)},
+celle qui précède pourra s'écrire simplement
+\[
+\frac{dp}{\rho} = dF - d\tfrac{1}{2} (u^2 + v^2 + w^2).
+\]
+Sous cette forme, le caractère de différentielle exacte est manifeste,
+car $\rho$~étant, ainsi que nous l'avons déjà dit, ou constant par rapport au
+temps, qui est ici la variable indépendante, ou fonction de~$p$, le premier
+membre est, dans tous les cas, la différentielle de l'expression
+\DPPageSep{038.png}%
+$\ds\int\frac{dp}{\rho}$ entendue comme nous l'avons expliqué (\Pageref{SensIntegrale}), et par conséquent
+l'équation précédente donnera par l'intégration, en faisant
+passer tous les termes dans un même membre,
+\[
+\int\frac{dp}{\rho} - F(x,y,z) + \tfrac{1}{2}(u^2 + v^2 + w^2) = \const,
+\]
+équation qui, eu égard à la valeur~(22) de~$\varphi$, se confond bien avec
+\Eqref[l'équation]{(23)}, à laquelle nous avions été conduit directement.
+
+\marge[EquationGeneraleTermesFinis]{Équation générale\\en termes finis.}
+Nous avons donc, en résumé, trouvé deux familles de surfaces de
+nulle résistance, les surfaces d'\emph{égale masse} et les surfaces d'\emph{égale énergie},
+dont les équations constituent deux solutions complètes de l'équation
+différentielle de cette classe de surfaces. Or, cette équation étant
+du premier ordre, ce résultat suffit pour en obtenir l'intégrale générale.
+
+En effet, si l'on désigne par~$\Psi$ une fonction arbitraire, l'équation
+\[
+\Psi\bigl[ \rho (1 + \Delta ), \varphi\bigr] = 0
+\]
+donnera évidemment
+\begin{multline*}
+u\frac{d\Psi}{dx} + v\frac{d\Psi}{dy} + w\frac{d\Psi}{dz} \\
+  = \frac{d\Psi}{d · \rho (1 + \Delta)}
+  \left[ u\frac{d · \rho (1 + \Delta)}{dx}
+       + v\frac{d · \rho (1 + \Delta)}{dy}
+       + w\frac{d · \rho (1 + \Delta)}{dz} \right] \\
+ + \frac{d\Psi}{d\varphi}
+  \left( u\frac{d\varphi}{dx}
+       + v\frac{d\varphi}{dy}
+       + w\frac{d\varphi}{dz} \right) = 0;
+\end{multline*}
+car les deux facteurs entre parenthèses, qui figurent dans le second
+membre, sont identiquement nuls, en vertu des équations \Eqno{(14)}~et~\Eqno{(24)}.
+
+L'équation ci-dessus vérifie donc l'équation aux différences partielles
+\Eqno{(9)}~ou~\Eqno{(8)}, et comme elle renferme d'ailleurs une fonction arbitraire
+permettant de réduire~$z$ à une fonction donnée de~$y$ pour $x=0$,
+c'est bien l'intégrale générale de \Eqref[l'équation]{(8)}.
+
+Si on la résout par rapport à~$\varphi$, et qu'on remplace ensuite cette fonction
+par sa valeur~\Eqno{(22)}, cette même équation pourra s'écrire sous la
+\DPPageSep{039.png}%
+forme plus explicite
+\[
+\tfrac{1}{2}(u^2 + v^2 + w^2) - F(x, y, z) + \int \frac{dp}{\rho}
+  = \psi\bigl[\rho (1 + \Delta)\bigr],
+\]
+en désignant par~$\psi$ une fonction arbitraire.
+
+Telle est l'équation générale des surfaces \emph{de nulle résistance}, exprimée
+à l'aide des éléments habituellement considérés du mouvement.
+
+
+\Section{III.}{ --- Étude Particulière des Surfaces D'égale Masse
+et D'égale Énergie.}
+{Représentation Géométrique Du Mouvement. --- Propriétés
+De Maximum et de Minimum.}
+
+\marge{Détermination géométrique:}
+Les deux grandes familles de surfaces que nous avons rencontrées
+dans le paragraphe précédent, et dont les équations sont les solutions
+complètes de l'équation différentielle des surfaces de nulle résistance,
+fournissent immédiatement une image très-nette du mouvement, ce
+qui était le but que nous nous étions proposé en commençant cette
+étude.
+
+\marge[DeterminationGeometriqueTrajectoire]{(\textit{a}) de la trajectoire,}
+En effet, chaque molécule étant assujettie à rester séparément sur
+l'une des surfaces appartenant à chacune des deux familles, puisque ce
+sont toutes deux des surfaces de \emph{nulle résistance}, nous pouvons formuler
+immédiatement la proposition suivante:
+
+\begin{thm}{V}
+La trajectoire de chaque molécule est l'intersection des
+deux surfaces d'égale masse et d'égale énergie, qui contiennent sa position
+initiale.
+\end{thm}
+
+\marge[DeterminationGeometriqueVitesse]{(\textit{b}) de la vitesse.}
+On voit ainsi comment ces deux familles de surfaces partagent la
+masse fluide en couches infiniment minces dont les intersections constituent
+précisément ces \emph{filets fluides}, constants de forme et d'apparence,
+qui ne sont autre chose que la succession des molécules soumises aux
+mêmes influences.
+%[** TN: Omit extra vertical space in original]
+
+La trajectoire de la molécule étant ainsi définie par l'intersection de
+deux surfaces, son mouvement serait complètement déterminé, si l'on
+\DPPageSep{040.png}%
+avait un moyen simple de se représenter la vitesse en chaque point.
+Cette seconde image nous sera fournie par le théorème suivant, que
+nous établirons, comme les précédents, de deux façons différentes:
+
+\begin{thm}{VI}
+La grandeur de la vitesse est moyenne proportionnelle
+entre le rayon de courbure de la section normale de la surface d'égale
+énergie qui contient sa direction, et la composante de la force totale qui
+sollicite l'unité de masse, dirigée suivant la normale à cette surface.
+\end{thm}
+
+\marge[DemonstrationSynthetiqueII]{Démonstration synthétique.}
+Pour établir cette proposition, décomposons dans le plan osculateur
+de la trajectoire a force totale~$m\scrF$ qui sollicite la molécule~$m$ en
+deux composantes, l'une \emph{tangentielle}, et l'autre \emph{normale} ou \emph{centripète};
+on sait que cette dernière aura pour expression
+\[
+m\scrF_{c} = \frac{mV^2}{R_0},\quad\text{ou pour l'unité de masse}\quad
+ \scrF_{c} = \frac{V^2}{R_0},
+\]
+$R_0$~étant le rayon de courbure de la trajectoire situé dans le plan osculateur.
+Or, si nous considérons en même temps que ce plan la section
+normale de la surface d'\emph{égale énergie} qui contient la direction de la
+vitesse, nous aurons, d'après le théorème de Meunier\footnotemark,
+\footnotetext{\emph{Voir} \bsc{Sturm}, \textit{Cours d'analyse de l'École Polytechnique}, t.~II, \no 698, p.~202.}%
+en appelant~$R_n$
+le rayon de courbure de cette section, et $\varepsilon$~l'angle de ces deux plans,
+ou encore l'angle de ces rayons entre eux,
+\[
+R_0 = R_{n} \cos\varepsilon,
+\]
+et par conséquent, en substituant dans l'équation précédente,
+\[
+\scrF_{c}=\frac{V^2}{R_{n} \cos\varepsilon},\quad\text{d'où}\quad
+V^{2}= R_{n} \scrF_{c} \cos\varepsilon.
+\]
+Or $\scrF_{c} \cos\varepsilon$ n'est autre chose que la composante de la force totale~$\scrF$ suivant
+la normale à la surface, et que nous représentons par~$\scrF_n$. En effet,
+pour obtenir la composante d'une force suivant une droite, on peut
+projeter d'abord cette force sur un plan quelconque passant par la
+droite, puis projeter ensuite cette projection sur la droite elle-même.
+Or si l'on considère le plan normal à la trajectoire au point considéré,
+\DPPageSep{041.png}%
+lequel contient à la fois la normale principale de la trajectoire et la
+normale à la surface d'égale énergie, $\scrF_c$~sera évidemment la projection
+de la force totale~$\scrF$ sur ce plan, et de même $\scrF_c \cos\varepsilon$ sera dans ce plan la
+projection de cette projection sur la normale à la surface au point considéré.
+
+L'équation précédente peut donc s'écrire
+\[
+\Tag{(25)}
+V^2 = R_n \scrF_n,
+\]
+ce qui justifie la proposition énoncée.
+
+\marge[DemonstrationAnalytiqueII]{Démonstration analytique.}
+On peut aussi déduire ce résultat des équations du mouvement;
+car de même que \Eqref[l'équation]{(24)}, qui est la dérivée totale de \Eqref[l'équation]{(23)}
+par rapport au temps, exprime une propriété différentielle
+du premier ordre, c'est-à-dire relative au plan tangent des surfaces
+d'égale énergie, de même la dérivée seconde devra exprimer une
+propriété différentielle du second ordre, c'est-à-dire relative à la courbure
+des mêmes surfaces.
+
+On trouve, en effet, en différentiant \Eqref[l'équation]{(24)},
+\begin{multline*}
+\qquad\qquad %[** TN: Squeeze to improve visual appearance]
+  \left( \frac{d^2 \varphi}{dt^2} \right)
+  = u\, \frac{d\left(\dfrac{d\varphi}{dx} \right)}{dt}
+  + v\, \frac{d\left(\dfrac{d\varphi}{dy} \right)}{dt}
+  + w\, \frac{d\left(\dfrac{d\varphi}{dz} \right)}{dt} \\
+  + \frac{du}{dt}\, \frac{d\varphi}{dt}
+  + \frac{dv}{dt}\, \frac{d\varphi}{dt}
+  + \frac{dw}{dt}\, \frac{d\varphi}{dt} = 0.\qquad\qquad
+\end{multline*}
+
+Or, comme on a, en vertu des équations \Eqno{(10)}~et~\Eqno{(1)},
+\begin{gather*}
+\left\{
+\begin{aligned}
+  \frac{d\left(\dfrac{d\varphi}{dx}\right)}{dt}
+   &= u\, \frac{d^2 \varphi}{dx^2}
+    + v\, \frac{d^2 \varphi}{dx\, dy}
+    + w\, \frac{d^2 \varphi}{dx\, dz}, \\
+  \frac{d\left(\dfrac{d\varphi}{dy}\right)}{dt}
+   &= u\, \frac{d^2 \varphi}{dx\, dy}
+    + v\, \frac{d^2 \varphi}{dy^2}
+    + w\, \frac{d^2 \varphi}{dx\, dz}, \\
+  \frac{d\left(\dfrac{d\varphi}{dz}\right)}{dt}
+   &= u\, \frac{d^2 \varphi}{dx\, dz}
+    + v\, \frac{d^2 \varphi}{dy\, dz}
+    + w\, \frac{d^2 \varphi}{dz^2},
+\end{aligned}\right. \\[4pt]
+\frac{du}{dt} = \scrX,\quad
+\frac{dv}{dt} = \scrY,\quad
+\frac{dw}{dt} = \scrZ,
+\end{gather*}
+\DPPageSep{042.png}%
+si l'on ajoute ces équations respectivement multipliées par $u$,~$v$,~$w$,
+$\dfrac{d\varphi}{dx}$, $\dfrac{d\varphi}{dy}$, $\dfrac{d\varphi}{dz}$, l'équation précédente pourra s'écrire
+\begin{multline*}
+    u^2 \frac{d^2\varphi}{dx^2}
+  + v^2\frac{d^2\varphi}{dy^2}
+  + w^2\frac{d^2\varphi}{dz^2}
+  + 2vw \frac{d^2\varphi}{dy\, dz}
+  + 2wu \frac{d^2\varphi}{dz\, dx}
+  + 2uv \frac{d^2\varphi}{dx\, dy} \\
+ + \scrX\frac{d\varphi}{dx}
+ + \scrY\frac{d\varphi}{dy}
+ + \scrZ\frac{d\varphi}{dz} = 0,
+\end{multline*}
+forme très-symétrique, analogue à celle de \Eqref[l'équation]{(24)}, mais d'un
+degré plus élevé.
+
+Pour trouver la signification de cette équation, il n'y a qu'à remplacer
+les composantes $u$,~$v$,~$w$ par leurs valeurs~(5), et à diviser tous les
+termes par
+$\sqrt{\left(\dfrac{d\varphi}{dx}\right)^2
+      +\left(\dfrac{d\varphi}{dy}\right)^2
+      +\left(\dfrac{d\varphi}{dz}\right)^2}$. On obtient ainsi, en séparant
+en deux membres et supposant que le radical emporte avec lui son
+signe,
+\begin{gather*}
+\makebox[0pt][c]{%[** TN: Force centering of wide expression]
+$-V^2\, \dfrac{
+    \dfrac{d^2\varphi}{dx^2} \cos^2\lambda
+  + \dfrac{d^2\varphi}{dy^2} \cos^2\mu
+  + \dfrac{d^2\varphi}{dz^2} \cos^2\nu %\\
+  + 2 \dfrac{d^2\varphi}{dy\, dz} \cos\mu \cos\nu
+  + 2 \dfrac{d^2\varphi}{dz\, dx} \cos\nu \cos\lambda
+  + 2 \dfrac{d^2\varphi}{dx\, dy} \cos\lambda \cos\mu}
+{\sqrt{\left(\dfrac{d\varphi}{dx}\right)^2
+     + \left(\dfrac{d\varphi}{dy}\right)^2
+     + \left(\dfrac{d\varphi}{dz}\right)^2}}$} \\
+  = \frac{\scrX\dfrac{d\varphi}{dx}
+        + \scrY\dfrac{d\varphi}{dy}
+        + \scrZ\dfrac{d\varphi}{dz}}
+{\sqrt{\left(\dfrac{d\varphi}{dx}\right)^2
+     + \left(\dfrac{d\varphi}{dy}\right)^2
+     + \left(\dfrac{d\varphi}{dz}\right)^2}}
+\end{gather*}
+
+Sous cette forme, on reconnaît au premier membre, dans le coefficient
+de~$V^2$, l'expression de la courbure de la section normale de la
+surface $\varphi = \const$, qui contient la direction $(\lambda, \mu, \nu)$, c'est-à-dire la
+vitesse\footnotemark,
+\footnotetext{\emph{Voir} \bsc{Moigno}, \textit{Leçons de Calcul différentiel et de Calcul intégral}, t.~II (3\ieme~Leçon)
+  §~186, p.~350.}%
+et dans le second membre la composante de la force totale
+suivant la normale à la même surface.
+
+Cette équation peut donc s'écrire, en empruntant la notation déjà
+usitée,
+\[
+V^2\, \frac{1}{R_n} = \scrF_{n},
+\]
+\DPPageSep{043.png}%
+et par conséquent coïncide avec \Eqref[l'équation]{(25)}, qui exprime le \ThmRef{VI}\@.
+
+Notons d'ailleurs que cette proposition n'a rien de spécial aux surfaces
+d'égale énergie, et nous eussions pu tout aussi bien, pour le but
+que nous avions en vue, considérer les surfaces d'égale masse, ou toute
+autre surface d'égale résistance. Si nous avons spécifié les surfaces
+d'égale énergie dans l'énoncé de notre théorème, c'est qu'elles sont les
+seules qui subsistent dans tous les cas, et que nous allons avoir à faire
+usage de cette propriété, spécialement dans le cas des liquides homogènes,
+où elles subsistent seules, et que nous allons maintenant examiner.
+
+\marge[CasParticulierLiquidesHomogenes]{Cas particulier des liquides homogènes.}
+La considération des surfaces d'égale masse et d'égale énergie, jointe
+à la connaissance de la force totale qui sollicite la molécule, fournira
+donc, en général, une représentation très-simple et très-nette du mouvement
+de cette molécule. Cette image fait malheureusement défaut,
+du moins telle que nous venons de la présenter dans le cas particulier
+des liquides homogènes; car alors, d'une part, la dilatation étant
+constamment nulle à cause de l'incompressibilité du fluide, et, de
+l'autre, la densité se réduisant à une constante à cause de son homogénéité,
+la première des deux familles de surfaces de nulle résistance
+disparaît; mais, même encore dans ce cas, il est facile d'obtenir une
+représentation très-simple du mouvement au moyen des mêmes éléments.
+
+Pour cela, remarquons tout d'abord que, d'une part, \Eqref[l'équation]{(21)}
+pouvant s'écrire $V^2 = 2(\varphi + q)$, et s'énoncer par cette formule: «\;\emph{La force
+% [** TN: \( \) = Upright ()]
+vive \(ou le carré de la vitesse\) est le double de la somme de l'\textsc{énergie} et du
+\textsc{travail}}\;»; que, d'autre part, le travail~$q$ étant alors le \emph{potentiel} de la
+force totale qui sollicite l'unité de masse, il en résulte qu'on connaîtra
+immédiatement la grandeur de la vitesse, si l'on suppose connues
+l'énergie et la force totale en chaque point.
+
+Il n'y a donc à déterminer réellement, dans ce cas, que la trajectoire.
+Or la connaissance de la grandeur de la vitesse suffit, par le moyen du
+\ThmRef{VI}, pour déterminer en même temps sa direction; car les surfaces
+d'égale énergie existant toujours, et la trajectoire de la molécule
+étant contenue tout entière sur l'une de ces surfaces, il est facile de
+\DPPageSep{044.png}%
+déterminer sa direction en chaque point par l'angle qu'elle forme avec
+une autre direction définie sur cette surface, par exemple celle des
+lignes de courbure.
+
+En effet, \Eqref[l'équation]{(25)} donnant immédiatement l'expression du
+rayon de courbure de la section normale qui contient la vitesse, savoir
+\[
+R_n = \frac{V^2}{\scrF_n},
+\]
+la connaissance de ce rayon de courbure suffit à déterminer la direction
+de cette section; car, si dans le plan tangent et du point considéré
+comme centre on trace d'une part l'\emph{indicatrice} relative à ce point,
+ayant pour axes les racines carrées des rayons de courbure principaux,
+et d'autre part un cercle avec la quantité~$\sqrt{R_n}$ pour rayon, la direction
+de la vitesse sera nécessairement l'un des deux diamètres communs à
+ces deux courbes: la continuité indiquant suffisamment, d'ailleurs, laquelle
+de ces deux directions on devra prendre en chaque point, puisqu'au
+point initial la direction de la vitesse est une des données de la
+question.
+
+En d'autres termes, si l'on désigne par $R'$~et~$R''$ les deux rayons de
+courbure principaux, et par~$r$ l'angle de la section normale considérée
+avec l'une des sections principales, on aura
+\[
+\frac{1}{R_n} = \frac{1}{R'} \cos^2 r + \frac{1}{R''} \sin^2 r;
+\]
+et par conséquent, eu substituant dans l'équation précédente,
+\[
+\frac{1}{R'} \cos^2 r + \frac{1}{R''} \sin^2 r = \frac{\scrF_n}{V^2},
+\]
+ou, en résolvant par rapport à l'angle cherché~$r$,
+\[
+\tang r = ± \sqrt{
+  \frac{\dfrac{\scrF_n}{V^2} - \dfrac{1}{R'}}
+       {\dfrac{1}{R''} - \dfrac{\scrF_n}{V^2}}},
+\]
+équation qui détermine en chaque point la direction de la vitesse par
+rapport aux lignes de courbure de la surface d'\emph{égale énergie}, et qu'on
+\DPPageSep{045.png}%
+peut considérer en quelque sorte comme l'équation de la trajectoire
+sur cette surface.
+
+On pourrait aussi appliquer ce dernier mode de représentation au
+cas des fluides compressibles, puisque le travail~$q$ est encore, dans ce
+cas, le potentiel relatif à la force totale qui sollicite la molécule; mais
+il vaut mieux se figurer le mouvement à l'aide du procédé que nous
+avons décrit tout d'abord, et qui est à la fois plus simple, plus élégant
+et plus général, et réserver celui que nous venons d'exposer pour le
+cas des liquides homogènes, qui est le seul pour lequel le premier procédé
+se trouve en défaut.
+
+\marge[ProprietesMaximumMinimum]{Propriétés\\de maximum\\et de minimum.}
+Enfin, outre les propriétés générales qui caractérisent toutes les surfaces
+de nulle résistance, et que nous avons exposées dans le premier
+paragraphe, les deux familles que nous nous sommes proposé d'étudier
+spécialement dans celui-ci possèdent encore des propriétés intéressantes
+de maximum et de minimum qui leur appartiennent en
+propre et que nous allons établir en terminant ce travail.
+
+Ces deux familles, en effet, en même temps qu'elles appartiennent
+à la classe importante des surfaces de \emph{nulle résistance}, rentrent aussi
+dans la catégorie des surfaces dites \emph{représentatives}, c'est-à-dire de celle
+dont l'équation s'obtient en égalant à un paramètre arbitraire une
+fonction déterminée de $x$,~$y$ et~$z$. Or ces différentes surfaces, que l'on
+est amené à considérer dans une foule de questions de Mécanique ou
+de Physique mathématique, telles que la théorie de l'attraction (surfaces
+de \emph{niveau} ou d'\emph{égal potentiel}), de la chaleur (surfaces \emph{isothermes}
+ou d'\emph{égale température}), offrent, par suite de leur origine commune,
+une même propriété, qui se traduit différemment suivant les différentes
+théories auxquelles elles sont relatives, et qui découle immédiatement
+des deux propositions suivantes, que nous allons maintenant démontrer.
+
+\begin{lem}{I}
+\MarginBox[LemmesRelatifsSurfacesRepresentatives]{Lemmes relatifs\\aux surfaces\\représentatives.}
+Si $V$ représente une fonction de $x$,~$y$ et~$z$, et que l'on compare
+entre elles les valeurs que prend l'intégrale $\ds\iiint V\, dx\, dy\, dz$ à l'intérieur
+de différentes surfaces, la valeur maximum ou minimum de cette
+intégrale correspondra précisément à la surface $V = 0$.
+\end{lem}
+\DPPageSep{046.png}%
+
+En effet, posons
+\[
+ I = \iiint V\, dx\, dy\, dz,
+\]
+et calculons~$\delta I$ suivant les procédés habituels du calcul des variations;
+nous trouverons successivement
+\vspace*{\abovedisplayskip}
+\[
+\makebox[0pt][c]{%[** TN: Force centering of wide display]
+$\begin{aligned}
+\delta I
+  &= \iiint \delta(V\, dx\, dy\, dz) \\
+  &= \iiint \bigl[\delta V · dx\, dy\, dz + V\, \delta(dx\, dy\, dz)\bigr] \\
+  &= \iiint \left[ \left(
+     \frac{dV}{dx}\, \delta x
+   + \frac{dV}{dy}\, \delta y
+   + \frac{dV}{dz}\, \delta z \right) dx\, dy\, dz
+   + V(dy\, dz\, \delta\, dx + dz\, dx\, \delta\,dy + dx\, dy\, \delta\,dz)
+   \right] \\
+  &= \iiint \left(
+     \frac{dV}{dx}\, \delta x
+   + \frac{dV}{dy}\, \delta y
+   + \frac{dV}{dz}\, \delta z \right) dx\, dy\, dz
+   + \iiint V \left(
+     \frac{d\, \delta x}{dx}
+   + \frac{d\, \delta y}{dy}
+   + \frac{d\, \delta z}{dz} \right) dx\, dy\, dz,
+\end{aligned}$}
+\]
+ou, en intégrant par parties le second terme et faisant la réduction
+avec le premier,
+\[
+ \delta I
+ = \iint (V\, \delta x)_{1}^{2}\, dy\, dz
+ + \iint (V\, \delta y)_{1}^{2}\, dz\, dx
+ + \iint (V\, \delta z)_{1}^{2}\, dx\, dy,
+\]
+le crochet marqué des indices $1$~et~$2$ signifiant, suivant une notation
+connue, la différence des valeurs du terme qu'il renferme pour les deux
+limites de l'intégration.
+
+On peut mettre ces intégrations sous une forme plus saisissante, en
+remplaçant les intégrales qui y figurent par une sommation relative
+aux éléments de la surface elle-même. En désignant par $\alpha$,~$\beta$,~$\gamma$ les
+angles de la normale extérieure avec les axes coordonnés, par~$\omega$ l'élément
+de surface, et par~$\tsum$ une sommation s'étendant à toute la surface
+considérée, une transformation déjà usitée permettra d'écrire
+\[
+\delta I = \tsum \omega
+  V(\delta x \cos\alpha + \delta y \cos\beta + \delta z \cos\gamma).
+\]
+Or, sous cette forme, la condition du maximum et du minimum est évidente.
+En effet, cette condition étant, comme l'on sait, que la variation~$\delta I$
+soit nulle, quels que soient $\delta x$,~$\delta y$ et~$\delta z$, il s'ensuit qu'il faut que
+l'on ait $V = 0$, ce qui justifie la proposition énoncée.
+
+Il sera toujours facile, d'ailleurs, de distinguer si l'on obtient ainsi
+\DPPageSep{047.png}%
+un maximum ou un minimum, car on voit tout de suite que l'on aura
+l'un ou l'autre suivant que la fonction~$V$ prendra des valeurs négatives
+ou positives, pour les points extérieurs à la surface $V= 0$, et très-voisins
+de cette surface.
+
+En effet, ayant calculé la valeur de l'intégrale proposée à l'intérieur
+de cette surface, pour obtenir la valeur de la même intégrale à l'intérieur
+d'une autre surface infiniment voisine, il faudra ajouter les
+termes correspondant aux portions de la seconde surface \emph{extérieures} à
+la première et retrancher les termes correspondant aux portions \emph{intérieures}
+à la première surface, mais qui n'appartiennent pas à la seconde.
+Or, dans la première hypothèse, les premiers termes seront négatifs,
+les seconds positifs; la seconde valeur de l'intégrale sera donc toujours
+plus petite que la première et, par conséquent, on aura un maximum:
+ce serait le contraire dans l'autre cas. Ce raisonnement légèrement
+modifié suffirait, au reste, pour établir \textit{a~posteriori} l'existence de
+la proposition elle-même.
+
+La proposition que nous venons de démontrer n'est pas susceptible
+toutefois d'une application immédiate, sous la forme où nous l'avons
+établie, parce que le maximum ou le minimum qu'elle considère est un
+maximum ou minimum \emph{absolu}; mais elle devient féconde, en conséquence,
+pour les surfaces représentatives, si on la modifie par l'introduction
+des maxima et des minima \emph{relatifs}, qui se ramènent aux premiers,
+comme l'on sait, d'une façon fort simple.
+
+C'est ce que nous allons faire dans le lemme suivant:
+
+\begin{lem}{II}
+Si $U$~et~$W$ représentent deux fonctions déterminées de $x$,~$y$
+et~$z$, et que l'on compare entre elles les valeurs que prend l'intégrale
+$\ds\iiint U\, dx\, dy\, dz$, à l'intérieur de différentes surfaces, sous la condition
+que l'intégrale $\ds\iiint W\, dx\, dy\, dz$ prise entre les mêmes limites conserve
+une valeur constante, la valeur maximum ou minimum de cette intégrale
+correspondra à l'une des surfaces représentées par l'équation
+$\dfrac{U}{W} = \const$%[** TN: [sic], \const adds its own period]
+\end{lem}
+
+En effet, si l'on recherche à l'intérieur de quelle surface l'intégrale
+\DPPageSep{048.png}%
+$\ds\iiint U\, dx\, dy\, dz$ prend une valeur maximum ou minimum, sous la condition
+que l'intégrale $\ds\iiint W\, dx\, dy\, dz$ ait une valeur donnée, il faudra,
+en vertu de la théorie des maxima ou minima relatifs, rechercher le
+maximum ou minimum absolu de l'expression
+\[
+\iiint U\, dx\, dy\, dz + C \iiint W\, dx\, dy\, dz
+   = \iiint (U + CW)\, dx\, dy\, dz,
+\]
+$C$~étant une constante. Or, pour l'obtenir, il n'y aura qu'à faire dans le
+lemme précédent
+\[
+V = U + CW,
+\]
+et la solution nous sera fournie immédiatement par l'équation
+\[
+U + CW = 0,
+\]
+où $C$~est une constante qui sera déterminée précisément par la condition
+donnée, relative à la seconde intégrale. On voit ainsi que le problème
+est résolu par l'une des surfaces appartenant à la famille de surfaces
+représentatives dont l'équation est
+\[
+\Tag{(26)}
+\frac{U}{W} = \const
+\]
+
+Il est bien évident, d'ailleurs, que la proposition est réversible, et
+que l'on arriverait à la même conclusion si l'on cherchait le maximum
+ou le minimum de l'intégrale $\ds\iiint W\, dx\, dy\, dz$ sous la condition que
+l'intégrale $\ds\smash[t]{\iiint} U\, dx\, dy\, dz$ conservât une valeur donnée.
+\bigskip
+
+Pour montrer la fécondité de la proposition qui précède, et avant de
+revenir au mouvement des fluides, qui fait l'objet de ce travail, nous
+allons l'appliquer comme exemple à un problème emprunté à la théorie
+de la chaleur.
+
+Imaginons un corps ou milieu dont tous les points étaient originairement
+à une même température, que nous prendrons pour zéro, et
+qui, soumis ensuite à l'action de sources constantes de froid ou de chaleur,
+a fini par arriver à un état d'équilibre de température. Si nous
+\DPPageSep{049.png}%
+considérons en particulier une portion de ce corps limitée par une
+surface quelconque, et que nous désignions encore sa densité en chaque
+point par~$\rho$, sa masse sera exprimée par l'intégrale $\ds\iiint \rho\, dx\, dy\, dz$, et
+la quantité totale de chaleur perdue ou gagnée, en passant de l'état
+initial à l'état final, par l'intégrale $c\ds\iiint \rho\Theta\, dx\, dy\, dz$, $\Theta$~désignant la
+température et $c$~le calorique spécifique, que nous supposerons constant.
+Si l'on se propose de déterminer par quelle surface il faudrait
+limiter cette portion du corps, pour que, avec une masse donnée, la
+quantité de chaleur perdue ou gagnée soit maximum ou minimum, il
+n'y aura qu'à faire dans ce qui précède $U = c \rho\Theta$, et $W = \rho$, ce qui donnera
+pour solution $\Theta = \const$, c'est-à-dire une \emph{surface isotherme}. Ces
+surfaces jouissent donc de la propriété nouvelle et intéressante de
+limiter les portions du corps qui, offrant une masse donnée, ont gagné
+ou perdu dans les conditions précitées une quantité de chaleur
+maximum ou minimum.
+
+\marge{Application\\aux surfaces:}
+Ces préliminaires établis, appliquons les considérations qui précèdent
+aux diverses surfaces représentatives qui se présentent dans
+l'étude du mouvement permanent des fluides. Nous en déduirons sans
+peine une série de propriétés intéressantes, dont l'ensemble nous paraît
+jeter un nouveau jour sur la théorie si obscure du mouvement, et
+dont l'énumération terminera notre travail.
+
+\marge[ApplicationSurfacesEgaleDensite]{(\textit{a}) d'égale densité,}
+\primo Si l'on prend, pour les deux intégrales considérées dans le
+\LemRef{II}, la masse et le volume de la portion du fluide renfermée à
+l'intérieur d'une même surface, ou, en d'autres termes, si l'on prend
+$U = \rho$ et $W = 1$, \Eqref[l'équation]{(26)} se réduit à $\rho = \const$, d'où la conclusion:
+
+\begin{thm}{VII}
+Les surfaces d'égale densité sont celles qui, pour un
+volume donné, renferment une masse maximum ou minimum.
+\end{thm}
+
+\marge[ApplicationSurfacesEgaleDilatation]{(\textit{b}) d'égale dilatation,}
+\secundo Si, au lieu de la masse et du volume d'une portion du fluide, on
+prend pour les deux intégrales considérées les quantités que nous avons
+appelées \emph{dilatation totale} et \emph{volume primitif} (\emph{voir} \Pagerefs{DilatationTotale}{VolumePrimitif}) de cette
+\DPPageSep{050.png}%
+même masse, ou, en d'autres termes, si l'on prend $U = \dfrac{\Delta}{1 + \Delta}$ et
+$W = \dfrac{1}{1 + \Delta}$, \Eqref[l'équation]{(26)} se réduit à $\Delta = \const$, d'où la conclusion:
+
+\begin{thm}{VIII}
+Les surfaces d'égale dilatation sont celles qui, pour
+un volume primitif donné, renferment une dilatation totale maximum ou
+minimum.
+\end{thm}
+
+Si l'on se rappelle, d'ailleurs, que d'après nos définitions la dilatation
+totale exprime la différence entre le volume actuel et le volume
+primitif d'une même masse, on voit immédiatement qu'on pourra énoncer
+la propriété précédente sous cette autre forme:
+
+%[** TN: Guillemets added by environment; mask newlines to prevent line breaks]
+\begin{theorem}%
+Les \textsc{surfaces d'égale dilatation} sont celles qui, pour un \textsc{volume
+primitif} donné, renferment un \textsc{volume} maximum ou minimum.%
+\end{theorem}
+
+Ou encore sous celle-ci:
+
+\begin{theorem}%
+Les \textsc{surfaces d'égale dilatation} sont celles qui, pour un \textsc{volume}
+donné, renferment une \textsc{dilatation totale} maximum ou minimum.%
+\end{theorem}
+
+Notons, en outre, que les surfaces d'\emph{égale dilatation} se confondraient
+évidemment avec les surfaces d'\emph{égale densité}, si l'on avait pris pour \emph{origine
+des dilatations} l'une de ces dernières surfaces.
+
+La première des deux propositions que nous venons d'énoncer s'applique
+évidemment aussi bien au cas de l'équilibre qu'au cas du mouvement
+permanent, et, dans ce cas, elle exprime une propriété nouvelle
+et intéressante des \emph{surfaces de niveau}, qui sont en même temps, comme
+l'on sait, surfaces d'\emph{égale pression}, et surfaces d'\emph{égale densité}. La seconde
+trouvera aussi son application à l'état d'équilibre, si on l'entend
+des modifications qu'a dû subir, pour arriver à cet état, un fluide compressible
+primitivement homogène, et soumis ensuite à des actions permanentes.
+Seulement, dans ce dernier cas, les surfaces d'égale dilatation
+se confondant évidemment avec les surfaces d'égale densité ou
+surfaces de niveau, les deux théorèmes ci-dessus n'expriment plus en
+réalité qu'une seule et même propriété, ainsi qu'il est facile de s'en
+convaincre avec un instant de réflexion.
+
+Les propositions suivantes, au contraire, n'ont de signification que
+dans le cas du mouvement.
+\DPPageSep{051.png}%
+
+\marge[ApplicationSurfacesEgaleForceVive]{(\textit{c}) d'égale force\\vive,}
+\tertio Prenons, pour les deux intégrales du \LemRef{II}, la \emph{force vive totale}
+(\Pagerefs{ForceViveI}{ForceViveII}) et la masse d'une même portion du fluide, c'est-à-dire
+prenons $U = \rho V^2$ et $W = \rho$, \Eqref[l'équation]{(26)} se réduira à $V^2 = \const$;
+d'où la conclusion:
+
+\begin{thm}{IX}
+Les surfaces d'égale force vive \(ou d'égale vitesse\) %[** TN: \( \) = Upright ()]
+sont celles qui, pour une masse donnée, renferment une force vive totale
+maximum ou minimum.
+\end{thm}
+
+\marge[ApplicationSurfacesEgalTravail]{(\textit{d}) d'égal travail,}
+\quarto Prenant encore la masse pour l'une des deux intégrales, prenons
+pour l'autre ce que nous avons appelé le \emph{travail total} (\emph{voir} \Pageref{TravailTotal}), correspondant
+à la même portion du fluide, ou, en d'autres termes, faisons
+$U = q\rho$ et $W = \rho$; \Eqref[l'équation]{(26)} se réduira à $q = \const$, et par conséquent,
+en nous reportant aux définitions de la \Pageref[page]{TravailTotal}, nous pourrons
+formuler cette proposition:
+
+\begin{thm}{X}
+Les surfaces d'égal travail sont celles qui, pour une
+masse donnée, renferment un travail total maximum ou minimum.
+\end{thm}
+
+Il est à remarquer que dans le cas des fluides compressibles, et aussi
+dans celui des liquides homogènes, $q$~est un potentiel, et les surfaces
+d'égal travail dont il est question dans ce théorème sont alors les surfaces
+de niveau relatives aux actions totales qui sollicitent la molécule
+fluide.
+
+\marge[ApplicationSurfacesEgaleMasse]{(\textit{e}) d'égale masse,}
+\FrenchEnumerate5 Pour revenir, en terminant, aux deux grandes familles de surfaces
+de nulle résistance qui font objet plus spécial de ce dernier paragraphe,
+considérons en même temps la masse et le volume primitifs d'une même
+portion du fluide, et faisons, dans le \LemRef{II}, $U = \rho$ et $W = \dfrac{1}{1 + \Delta}$;
+\Eqref[l'équation]{(26)} deviendra $\rho (1 + \Delta) = \const$, et par conséquent, en
+nous reportant aux définitions du paragraphe précédent, nous pourrons
+énoncer cette propriété:
+
+\begin{thm}{XI}
+Les surfaces d'égale masse sont celles qui, pour un
+volume primitif donné, renferment une masse maximum ou minimum.
+\end{thm}
+
+Notons seulement que, dans le cas des liquides, les surfaces d'égale
+masse n'étant autres que les surfaces d'égale densité, cette propriété
+se confond pour ce cas avec le \ThmRef{VII}\@.
+\DPPageSep{052.png}%
+
+\marge[ApplicationSurfacesEgaleEnergie]{(\textit{f}) d'égale énergie.}
+\FrenchEnumerate6 Enfin considérons, en même temps que la masse, l'\emph{énergie totale}
+(\Pageref{EnergieTotale}) d'une certaine portion du fluide, c'est-à-dire faisons à la fois
+$U = \varphi\rho$ et $W = \rho$; \Eqref[l'équation]{(26)} se réduira à $\varphi = \const$, ce qui nous
+donnera cette dernière proposition:
+
+\begin{thm}{XII}
+Les surfaces d'égale énergie sont celles qui, pour
+une masse donnée, renferment une énergie totale maximum ou minimum.
+\end{thm}
+
+\marge[Conclusion]{Conclusion.}
+Ces propriétés remarquables, jointes à la représentation que nous
+avons donnée du mouvement, font comprendre l'importance du rôle
+que les surfaces d'\emph{égale masse} et d'\emph{égale énergie} jouent dans la théorie,
+et l'intérêt qu'elles empruntent à leur double caractère de surfaces \emph{représentatives},
+et de surfaces de \emph{nulle résistance}. C'est pourquoi nous
+nous sommes proposé, dans ce travail, d'appeler sur elles l'attention
+des géomètres, dans la pensée que peut-être leur considération pourrait
+servir de point de départ à un analyste plus habile, pour aborder le
+problème si difficile de l'intégration des équations de l'Hydrodynamique.
+\vfil
+
+\begin{center}
+\tb[3cm]
+\end{center}
+\vfil\vfil
+\DPPageSep{053.png}%
+
+\Chapter{Résumé Analytique.}{}
+
+\ToCRow{\textsc{Introduction}. --- Exposé du sujet}{ExposeSujet}
+
+\ToCSection{I\@. --- Surfaces de nulle résistance.}
+
+\ToCSubsection{Définitions. --- Propriétés caractéristiques.}
+
+\ToCRow{Résistance au mouvement d'un fluide}{ResistanceMouvementFluide}
+%
+\ToCRow{Surfaces de nulle résistance}{SurfacesNulleResistance}
+%
+\ToCRow{Propriétés relatives: (\textit{a}) à l'ellipsoïde central d'inertie}{ProprietesEllipsoideCentral}
+%
+\ToCRow{\Ditto{Propriétés relatives:} (\textit{b}) au solide représentatif}{ProprietesSoliceRepresentatif}
+%
+\ToCRow{Examen du cas général}{ExamenCasGeneral}
+%
+\ToCRow{Démonstration synthétique}{DemonstrationSynthetiqueI}
+%
+\ToCRow{Démonstration analytique}{DemonstrationAnalytiqueI}
+
+
+\ToCSection{II\@. --- Recherche analytique des surfaces de nulle résistance.}
+
+\ToCSubsection{Équation aux différences partielles. --- Solutions complètes. --- Équation générale en
+termes finis.}
+
+\ToCRow{Équation aux différences partielles}{EquationDifferencesPartielles}
+%
+\ToCRow{Interprétation mécanique de cette équation}{InterpretationMecanique}
+%
+\ToCRow{Première solution complète}{PremiereSolution}
+%
+\ToCRow{Cas des liquides}{CasLiquides}
+%
+\ToCRow{Cas des fluides compressibles}{CasFluides}
+%
+\ToCRow{Définition de la dilatation}{DefinitionDilatation}
+%
+\ToCRow{Expression de la masse moléculaire}{ExpressionMasseMoleculaire}
+%
+\ToCRow{Surfaces d'égale masse}{SurfacesEgaleMasse}
+%
+\ToCRow{Définitions: (\textit{a}) du volume primitif}{DefinitionVolumePrimitif}
+%
+\ToCRow{\Ditto{Définitions:} (\textit{b}) de la dilatation totale}{DefinitionDilatationTotale}
+%
+\ToCRow{Deuxième solution complète}{DeuxiemeSolution}
+\DPPageSep{054.png}%
+%
+\ToCRow{Définitions: (\textit{a}) de la force vive}{DefinitionForceVive}
+%
+\ToCRow{\Ditto{Définitions:} (\textit{b}) du travail}{DefinitionTravail}
+%
+\ToCRow{\Ditto{Définitions:} (\textit{c}) de l'énergie}{DefinitionEnergie}
+%
+\ToCRow{Surfaces d'égale énergie}{SurfacesEgaleEnergie}
+%
+\ToCRow{Intégrale des forces vives}{IntegraleForcesVives}
+%
+\ToCRow{Équation générale en termes finis}{EquationGeneraleTermesFinis}
+
+
+\ToCSection{III\@. --- Étude particulière des surfaces d'égale masse et d'égale énergie.}
+
+\ToCSubsection{Représentation géométrique du mouvement. --- Propriétés de maximum et de minimum.}
+
+\ToCRow{Détermination géométrique: (\textit{a}) de la trajectoire}{DeterminationGeometriqueTrajectoire}
+%
+\ToCRow{\Ditto{Détermination géométrique:} (\textit{b}) de la vitesse}{DeterminationGeometriqueVitesse}
+%
+\ToCRow{Démonstration synthétique}{DemonstrationSynthetiqueII}
+%
+\ToCRow{Démonstration analytique}{DemonstrationAnalytiqueII}
+%
+\ToCRow{Cas particulier des liquides homogènes}{CasParticulierLiquidesHomogenes}
+%
+\ToCRow{Propriétés de maximum et de minimum}{ProprietesMaximumMinimum}
+%
+\ToCRow{Lemmes relatifs aux surfaces représentatives}{LemmesRelatifsSurfacesRepresentatives}
+%
+\ToCRow{Application aux surfaces (\textit{a}) d'égale densité}{ApplicationSurfacesEgaleDensite}
+%
+\ToCRow{\Ditto{Application aux surfaces} (\textit{b}) d'égale dilatation}{ApplicationSurfacesEgaleDilatation}
+%
+\ToCRow{\Ditto{Application aux surfaces} (\textit{c}) d'égale force vive}{ApplicationSurfacesEgaleForceVive}
+%
+\ToCRow{\Ditto{Application aux surfaces} (\textit{d}) d'égal travail}{ApplicationSurfacesEgalTravail}
+%
+\ToCRow{\Ditto{Application aux surfaces} (\textit{e}) d'égale masse}{ApplicationSurfacesEgaleMasse}
+%
+\ToCRow{\Ditto{Application aux surfaces} (\textit{f}) d'égale énergie}{ApplicationSurfacesEgaleEnergie}\\[\baselineskip]
+
+\ToCRow{\textsc{Conclusion}}{Conclusion}
+\vfil
+
+\begin{flushright}
+\vloose\small%
+\settowidth{\TmpLen}{\textsc{Le Doyen de la Faculté des Sciences,}}%
+\begin{minipage}{\TmpLen}
+\centering
+\textit{Vu et approuvé.}\qquad\qquad \break
+Le 16 juin 1873. \\
+\textsc{Le Doyen de la Faculté des Sciences,} \\
+\normalsize MILNE EDWARDS.
+\end{minipage}
+\end{flushright}
+\begin{flushleft}
+\vloose\small%
+\settowidth{\TmpLen}{\textsc{Le Vice-Recteur de l'Académie de Paris,}}%
+\begin{minipage}{\TmpLen}
+\centering
+\textit{Permis d'imprimer.}\qquad\qquad \break
+\textsc{Le Vice-Recteur de l'Académie de Paris,} \\
+\normalsize A.~MOURIER.
+\end{minipage}
+\end{flushleft}
+\vfil
+\DPPageSep{055.png}%
+
+
+\Chapter{Seconde Thèse.}{PROPOSITIONS DONNÉES PAR LA FACULTÉ.}
+
+\primo Démontrer qu'un ellipsoïde à trois axes inégaux peut être la
+figure d'une masse fluide qui tourne uniformément autour d'un axe
+fixe, et dont les molécules s'attirent mutuellement en raison inverse du
+carré de la distance.
+\bigskip
+
+\secundo Propriétés des fonctions doublement périodiques.
+
+\vfill
+\begin{flushright}
+\vloose\small%
+\settowidth{\TmpLen}{\textsc{Le Doyen de la Faculté des Sciences,}}%
+\begin{minipage}{\TmpLen}
+\centering
+\textit{Vu et approuvé.}\qquad\qquad \break
+Le 16 juin 1873. \\
+\textsc{Le Doyen de la Faculté des Sciences,} \\
+\normalsize MILNE EDWARDS.
+\end{minipage}
+\end{flushright}
+\begin{flushleft}
+\vloose\small%
+\settowidth{\TmpLen}{\textsc{Le Vice-Recteur de l'Académie de Paris,}}%
+\begin{minipage}{\TmpLen}
+\centering
+\textit{Permis d'imprimer.}\qquad\qquad \break
+\textsc{Le Vice-Recteur de l'Académie de Paris,} \\
+\normalsize A.~MOURIER.
+\end{minipage}
+\end{flushleft}
+\vfill
+
+\noindent\hrule
+\medskip
+\begin{center}
+\textsc{\footnotesize Paris. --- Imprimerie de GAUTHIER-VILLARS, Quai des Augustins, 55.}
+\end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%% GUTENBERG LICENSE %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage\fancyhf{}\cleardoublepage
+
+\backmatter
+\phantomsection
+\pdfbookmark[-1]{Matière Subsidiere.}{Subsidiere}
+\phantomsection
+\pdfbookmark[0]{PG License.}{License}
+\fancyhead[C]{\textsc{LICENCE}}
+
+\begin{PGtext}
+End of the Project Gutenberg EBook of Étude sur le Mouvement Permanent des
+Fluides, by François de Salvert
+
+*** END OF THIS PROJECT GUTENBERG EBOOK FLUIDES ***
+
+***** This file should be named 33083-pdf.pdf or 33083-pdf.zip *****
+This and all associated files of various formats will be found in:
+        http://www.gutenberg.org/3/3/0/8/33083/
+
+Produced by Sébastien Blondeel, Joshua Hutchinson, and the
+Online Distributed Proofreading Team at http://www.pgdp.net
+(This file was produced from images from the Cornell
+University Library: Historical Mathematics Monographs
+collection.)
+
+
+Updated editions will replace the previous one--the old editions
+will be renamed.
+
+Creating the works from public domain print editions means that no
+one owns a United States copyright in these works, so the Foundation
+(and you!) can copy and distribute it in the United States without
+permission and without paying copyright royalties.  Special rules,
+set forth in the General Terms of Use part of this license, apply to
+copying and distributing Project Gutenberg-tm electronic works to
+protect the PROJECT GUTENBERG-tm concept and trademark.  Project
+Gutenberg is a registered trademark, and may not be used if you
+charge for the eBooks, unless you receive specific permission.  If you
+do not charge anything for copies of this eBook, complying with the
+rules is very easy.  You may use this eBook for nearly any purpose
+such as creation of derivative works, reports, performances and
+research.  They may be modified and printed and given away--you may do
+practically ANYTHING with public domain eBooks.  Redistribution is
+subject to the trademark license, especially commercial
+redistribution.
+
+
+
+*** START: FULL LICENSE ***
+
+THE FULL PROJECT GUTENBERG LICENSE
+PLEASE READ THIS BEFORE YOU DISTRIBUTE OR USE THIS WORK
+
+To protect the Project Gutenberg-tm mission of promoting the free
+distribution of electronic works, by using or distributing this work
+(or any other work associated in any way with the phrase "Project
+Gutenberg"), you agree to comply with all the terms of the Full Project
+Gutenberg-tm License (available with this file or online at
+http://gutenberg.org/license).
+
+
+Section 1.  General Terms of Use and Redistributing Project Gutenberg-tm
+electronic works
+
+1.A.  By reading or using any part of this Project Gutenberg-tm
+electronic work, you indicate that you have read, understand, agree to
+and accept all the terms of this license and intellectual property
+(trademark/copyright) agreement.  If you do not agree to abide by all
+the terms of this agreement, you must cease using and return or destroy
+all copies of Project Gutenberg-tm electronic works in your possession.
+If you paid a fee for obtaining a copy of or access to a Project
+Gutenberg-tm electronic work and you do not agree to be bound by the
+terms of this agreement, you may obtain a refund from the person or
+entity to whom you paid the fee as set forth in paragraph 1.E.8.
+
+1.B.  "Project Gutenberg" is a registered trademark.  It may only be
+used on or associated in any way with an electronic work by people who
+agree to be bound by the terms of this agreement.  There are a few
+things that you can do with most Project Gutenberg-tm electronic works
+even without complying with the full terms of this agreement.  See
+paragraph 1.C below.  There are a lot of things you can do with Project
+Gutenberg-tm electronic works if you follow the terms of this agreement
+and help preserve free future access to Project Gutenberg-tm electronic
+works.  See paragraph 1.E below.
+
+1.C.  The Project Gutenberg Literary Archive Foundation ("the Foundation"
+or PGLAF), owns a compilation copyright in the collection of Project
+Gutenberg-tm electronic works.  Nearly all the individual works in the
+collection are in the public domain in the United States.  If an
+individual work is in the public domain in the United States and you are
+located in the United States, we do not claim a right to prevent you from
+copying, distributing, performing, displaying or creating derivative
+works based on the work as long as all references to Project Gutenberg
+are removed.  Of course, we hope that you will support the Project
+Gutenberg-tm mission of promoting free access to electronic works by
+freely sharing Project Gutenberg-tm works in compliance with the terms of
+this agreement for keeping the Project Gutenberg-tm name associated with
+the work.  You can easily comply with the terms of this agreement by
+keeping this work in the same format with its attached full Project
+Gutenberg-tm License when you share it without charge with others.
+
+1.D.  The copyright laws of the place where you are located also govern
+what you can do with this work.  Copyright laws in most countries are in
+a constant state of change.  If you are outside the United States, check
+the laws of your country in addition to the terms of this agreement
+before downloading, copying, displaying, performing, distributing or
+creating derivative works based on this work or any other Project
+Gutenberg-tm work.  The Foundation makes no representations concerning
+the copyright status of any work in any country outside the United
+States.
+
+1.E.  Unless you have removed all references to Project Gutenberg:
+
+1.E.1.  The following sentence, with active links to, or other immediate
+access to, the full Project Gutenberg-tm License must appear prominently
+whenever any copy of a Project Gutenberg-tm work (any work on which the
+phrase "Project Gutenberg" appears, or with which the phrase "Project
+Gutenberg" is associated) is accessed, displayed, performed, viewed,
+copied or distributed:
+
+This eBook is for the use of anyone anywhere at no cost and with
+almost no restrictions whatsoever.  You may copy it, give it away or
+re-use it under the terms of the Project Gutenberg License included
+with this eBook or online at www.gutenberg.org
+
+1.E.2.  If an individual Project Gutenberg-tm electronic work is derived
+from the public domain (does not contain a notice indicating that it is
+posted with permission of the copyright holder), the work can be copied
+and distributed to anyone in the United States without paying any fees
+or charges.  If you are redistributing or providing access to a work
+with the phrase "Project Gutenberg" associated with or appearing on the
+work, you must comply either with the requirements of paragraphs 1.E.1
+through 1.E.7 or obtain permission for the use of the work and the
+Project Gutenberg-tm trademark as set forth in paragraphs 1.E.8 or
+1.E.9.
+
+1.E.3.  If an individual Project Gutenberg-tm electronic work is posted
+with the permission of the copyright holder, your use and distribution
+must comply with both paragraphs 1.E.1 through 1.E.7 and any additional
+terms imposed by the copyright holder.  Additional terms will be linked
+to the Project Gutenberg-tm License for all works posted with the
+permission of the copyright holder found at the beginning of this work.
+
+1.E.4.  Do not unlink or detach or remove the full Project Gutenberg-tm
+License terms from this work, or any files containing a part of this
+work or any other work associated with Project Gutenberg-tm.
+
+1.E.5.  Do not copy, display, perform, distribute or redistribute this
+electronic work, or any part of this electronic work, without
+prominently displaying the sentence set forth in paragraph 1.E.1 with
+active links or immediate access to the full terms of the Project
+Gutenberg-tm License.
+
+1.E.6.  You may convert to and distribute this work in any binary,
+compressed, marked up, nonproprietary or proprietary form, including any
+word processing or hypertext form.  However, if you provide access to or
+distribute copies of a Project Gutenberg-tm work in a format other than
+"Plain Vanilla ASCII" or other format used in the official version
+posted on the official Project Gutenberg-tm web site (www.gutenberg.org),
+you must, at no additional cost, fee or expense to the user, provide a
+copy, a means of exporting a copy, or a means of obtaining a copy upon
+request, of the work in its original "Plain Vanilla ASCII" or other
+form.  Any alternate format must include the full Project Gutenberg-tm
+License as specified in paragraph 1.E.1.
+
+1.E.7.  Do not charge a fee for access to, viewing, displaying,
+performing, copying or distributing any Project Gutenberg-tm works
+unless you comply with paragraph 1.E.8 or 1.E.9.
+
+1.E.8.  You may charge a reasonable fee for copies of or providing
+access to or distributing Project Gutenberg-tm electronic works provided
+that
+
+- You pay a royalty fee of 20% of the gross profits you derive from
+     the use of Project Gutenberg-tm works calculated using the method
+     you already use to calculate your applicable taxes.  The fee is
+     owed to the owner of the Project Gutenberg-tm trademark, but he
+     has agreed to donate royalties under this paragraph to the
+     Project Gutenberg Literary Archive Foundation.  Royalty payments
+     must be paid within 60 days following each date on which you
+     prepare (or are legally required to prepare) your periodic tax
+     returns.  Royalty payments should be clearly marked as such and
+     sent to the Project Gutenberg Literary Archive Foundation at the
+     address specified in Section 4, "Information about donations to
+     the Project Gutenberg Literary Archive Foundation."
+
+- You provide a full refund of any money paid by a user who notifies
+     you in writing (or by e-mail) within 30 days of receipt that s/he
+     does not agree to the terms of the full Project Gutenberg-tm
+     License.  You must require such a user to return or
+     destroy all copies of the works possessed in a physical medium
+     and discontinue all use of and all access to other copies of
+     Project Gutenberg-tm works.
+
+- You provide, in accordance with paragraph 1.F.3, a full refund of any
+     money paid for a work or a replacement copy, if a defect in the
+     electronic work is discovered and reported to you within 90 days
+     of receipt of the work.
+
+- You comply with all other terms of this agreement for free
+     distribution of Project Gutenberg-tm works.
+
+1.E.9.  If you wish to charge a fee or distribute a Project Gutenberg-tm
+electronic work or group of works on different terms than are set
+forth in this agreement, you must obtain permission in writing from
+both the Project Gutenberg Literary Archive Foundation and Michael
+Hart, the owner of the Project Gutenberg-tm trademark.  Contact the
+Foundation as set forth in Section 3 below.
+
+1.F.
+
+1.F.1.  Project Gutenberg volunteers and employees expend considerable
+effort to identify, do copyright research on, transcribe and proofread
+public domain works in creating the Project Gutenberg-tm
+collection.  Despite these efforts, Project Gutenberg-tm electronic
+works, and the medium on which they may be stored, may contain
+"Defects," such as, but not limited to, incomplete, inaccurate or
+corrupt data, transcription errors, a copyright or other intellectual
+property infringement, a defective or damaged disk or other medium, a
+computer virus, or computer codes that damage or cannot be read by
+your equipment.
+
+1.F.2.  LIMITED WARRANTY, DISCLAIMER OF DAMAGES - Except for the "Right
+of Replacement or Refund" described in paragraph 1.F.3, the Project
+Gutenberg Literary Archive Foundation, the owner of the Project
+Gutenberg-tm trademark, and any other party distributing a Project
+Gutenberg-tm electronic work under this agreement, disclaim all
+liability to you for damages, costs and expenses, including legal
+fees.  YOU AGREE THAT YOU HAVE NO REMEDIES FOR NEGLIGENCE, STRICT
+LIABILITY, BREACH OF WARRANTY OR BREACH OF CONTRACT EXCEPT THOSE
+PROVIDED IN PARAGRAPH F3.  YOU AGREE THAT THE FOUNDATION, THE
+TRADEMARK OWNER, AND ANY DISTRIBUTOR UNDER THIS AGREEMENT WILL NOT BE
+LIABLE TO YOU FOR ACTUAL, DIRECT, INDIRECT, CONSEQUENTIAL, PUNITIVE OR
+INCIDENTAL DAMAGES EVEN IF YOU GIVE NOTICE OF THE POSSIBILITY OF SUCH
+DAMAGE.
+
+1.F.3.  LIMITED RIGHT OF REPLACEMENT OR REFUND - If you discover a
+defect in this electronic work within 90 days of receiving it, you can
+receive a refund of the money (if any) you paid for it by sending a
+written explanation to the person you received the work from.  If you
+received the work on a physical medium, you must return the medium with
+your written explanation.  The person or entity that provided you with
+the defective work may elect to provide a replacement copy in lieu of a
+refund.  If you received the work electronically, the person or entity
+providing it to you may choose to give you a second opportunity to
+receive the work electronically in lieu of a refund.  If the second copy
+is also defective, you may demand a refund in writing without further
+opportunities to fix the problem.
+
+1.F.4.  Except for the limited right of replacement or refund set forth
+in paragraph 1.F.3, this work is provided to you 'AS-IS' WITH NO OTHER
+WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+WARRANTIES OF MERCHANTIBILITY OR FITNESS FOR ANY PURPOSE.
+
+1.F.5.  Some states do not allow disclaimers of certain implied
+warranties or the exclusion or limitation of certain types of damages.
+If any disclaimer or limitation set forth in this agreement violates the
+law of the state applicable to this agreement, the agreement shall be
+interpreted to make the maximum disclaimer or limitation permitted by
+the applicable state law.  The invalidity or unenforceability of any
+provision of this agreement shall not void the remaining provisions.
+
+1.F.6.  INDEMNITY - You agree to indemnify and hold the Foundation, the
+trademark owner, any agent or employee of the Foundation, anyone
+providing copies of Project Gutenberg-tm electronic works in accordance
+with this agreement, and any volunteers associated with the production,
+promotion and distribution of Project Gutenberg-tm electronic works,
+harmless from all liability, costs and expenses, including legal fees,
+that arise directly or indirectly from any of the following which you do
+or cause to occur: (a) distribution of this or any Project Gutenberg-tm
+work, (b) alteration, modification, or additions or deletions to any
+Project Gutenberg-tm work, and (c) any Defect you cause.
+
+
+Section  2.  Information about the Mission of Project Gutenberg-tm
+
+Project Gutenberg-tm is synonymous with the free distribution of
+electronic works in formats readable by the widest variety of computers
+including obsolete, old, middle-aged and new computers.  It exists
+because of the efforts of hundreds of volunteers and donations from
+people in all walks of life.
+
+Volunteers and financial support to provide volunteers with the
+assistance they need, are critical to reaching Project Gutenberg-tm's
+goals and ensuring that the Project Gutenberg-tm collection will
+remain freely available for generations to come.  In 2001, the Project
+Gutenberg Literary Archive Foundation was created to provide a secure
+and permanent future for Project Gutenberg-tm and future generations.
+To learn more about the Project Gutenberg Literary Archive Foundation
+and how your efforts and donations can help, see Sections 3 and 4
+and the Foundation web page at http://www.pglaf.org.
+
+
+Section 3.  Information about the Project Gutenberg Literary Archive
+Foundation
+
+The Project Gutenberg Literary Archive Foundation is a non profit
+501(c)(3) educational corporation organized under the laws of the
+state of Mississippi and granted tax exempt status by the Internal
+Revenue Service.  The Foundation's EIN or federal tax identification
+number is 64-6221541.  Its 501(c)(3) letter is posted at
+http://pglaf.org/fundraising.  Contributions to the Project Gutenberg
+Literary Archive Foundation are tax deductible to the full extent
+permitted by U.S. federal laws and your state's laws.
+
+The Foundation's principal office is located at 4557 Melan Dr. S.
+Fairbanks, AK, 99712., but its volunteers and employees are scattered
+throughout numerous locations.  Its business office is located at
+809 North 1500 West, Salt Lake City, UT 84116, (801) 596-1887, email
+business@pglaf.org.  Email contact links and up to date contact
+information can be found at the Foundation's web site and official
+page at http://pglaf.org
+
+For additional contact information:
+     Dr. Gregory B. Newby
+     Chief Executive and Director
+     gbnewby@pglaf.org
+
+
+Section 4.  Information about Donations to the Project Gutenberg
+Literary Archive Foundation
+
+Project Gutenberg-tm depends upon and cannot survive without wide
+spread public support and donations to carry out its mission of
+increasing the number of public domain and licensed works that can be
+freely distributed in machine readable form accessible by the widest
+array of equipment including outdated equipment.  Many small donations
+($1 to $5,000) are particularly important to maintaining tax exempt
+status with the IRS.
+
+The Foundation is committed to complying with the laws regulating
+charities and charitable donations in all 50 states of the United
+States.  Compliance requirements are not uniform and it takes a
+considerable effort, much paperwork and many fees to meet and keep up
+with these requirements.  We do not solicit donations in locations
+where we have not received written confirmation of compliance.  To
+SEND DONATIONS or determine the status of compliance for any
+particular state visit http://pglaf.org
+
+While we cannot and do not solicit contributions from states where we
+have not met the solicitation requirements, we know of no prohibition
+against accepting unsolicited donations from donors in such states who
+approach us with offers to donate.
+
+International donations are gratefully accepted, but we cannot make
+any statements concerning tax treatment of donations received from
+outside the United States.  U.S. laws alone swamp our small staff.
+
+Please check the Project Gutenberg Web pages for current donation
+methods and addresses.  Donations are accepted in a number of other
+ways including checks, online payments and credit card donations.
+To donate, please visit: http://pglaf.org/donate
+
+
+Section 5.  General Information About Project Gutenberg-tm electronic
+works.
+
+Professor Michael S. Hart is the originator of the Project Gutenberg-tm
+concept of a library of electronic works that could be freely shared
+with anyone.  For thirty years, he produced and distributed Project
+Gutenberg-tm eBooks with only a loose network of volunteer support.
+
+
+Project Gutenberg-tm eBooks are often created from several printed
+editions, all of which are confirmed as Public Domain in the U.S.
+unless a copyright notice is included.  Thus, we do not necessarily
+keep eBooks in compliance with any particular paper edition.
+
+
+Most people start at our Web site which has the main PG search facility:
+
+     http://www.gutenberg.org
+
+This Web site includes information about Project Gutenberg-tm,
+including how to make donations to the Project Gutenberg Literary
+Archive Foundation, how to help produce our new eBooks, and how to
+subscribe to our email newsletter to hear about new eBooks.
+\end{PGtext}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+%                                                                         %
+% End of the Project Gutenberg EBook of Étude sur le Mouvement Permanent des
+% Fluides, by François de Salvert                                         %
+%                                                                         %
+% *** END OF THIS PROJECT GUTENBERG EBOOK FLUIDES ***                     %
+%                                                                         %
+% ***** This file should be named 33083-t.tex or 33083-t.zip *****        %
+% This and all associated files of various formats will be found in:      %
+%         http://www.gutenberg.org/3/3/0/8/33083/                         %
+%                                                                         %
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
+
+\end{document}
+###
+@ControlwordReplace = (
+  ['\\ieme', '^{e}']
+  );
+
+@ControlwordArguments = (
+  ['\\Ord', 1, 1, '', '', 1, 1, '^{', '}'],
+  ['\\DPPageSep', 1, 0, '', ''],
+  ['\\Chapter', 1, 1, '', ' ', 1, 1, '', ''],
+  ['\\Section', 1, 1, '', ' ', 1, 1, '', ' ', 1, 1, '', ''],
+  ['\\MarginBox', 0, 0, '', '', 1, 0, '', ''],
+  ['\\marge', 0, 0, '', '', 1, 0, '', ''],
+  ['\\begin{thm}', 1, 1, 'Théorème ', ''],
+  ['\\begin{lem}', 1, 1, 'Lemme ', ''],
+  ['\\Titlerow', 1, 1, '', ''],
+  ['\\NameBox', 1, 1, '', ''],
+  ['\\Name', 0, 1, '', '', 1, 1, '', ''],
+  ['\\ToCSection', 1, 1, '', ''],
+  ['\\ToCSubsection', 1, 1, '', ''],
+  ['\\ToCRow', 1, 1, '', ' ..... ', 1, 0, '(00)', ''],
+  ['\\Ditto', 1, 0, '', ''],
+  ['\\Eqno', 0, 0, '', '', 1, 1, '', ''],
+  ['\\Eqref', 0, 1, '', '', 1, 1, ' ', ''],
+  ['\\Pagelabel', 1, 0, '', ''],
+  ['\\Pageref', 0, 0, '', 'page ', 1, 0, '(00)', ''],
+  ['\\Pagerefs', 0, 0, '', 'pages ', 1, 0, '(00)--(00)', '', 1, 0, '', ''],
+  ['\\ThmRef', 1, 1, 'théorème ', ''],
+  ['\\LemRef', 1, 1, 'lemme ', ''],
+  ['\\DPtypo', 1, 0, '', '', 1, 1, '', ''],
+  ['\\tb', 0, 0, '', '']
+  );
+###
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2010.5.6)  5 JUL 2010 02:50
+entering extended mode
+ %&-line parsing enabled.
+**33083-t.tex
+(./33083-t.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, arabic, farsi, croatian, ukrainian, russian, bulgarian, czech, slov
+ak, danish, dutch, finnish, basque, french, german, ngerman, ibycus, greek, mon
+ogreek, ancientgreek, hungarian, italian, latin, mongolian, norsk, icelandic, i
+nterlingua, turkish, coptic, romanian, welsh, serbian, slovenian, estonian, esp
+eranto, uppersorbian, indonesian, polish, portuguese, spanish, catalan, galicia
+n, swedish, ukenglish, pinyin, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/book.cls
+Document Class: book 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/leqno.clo
+File: leqno.clo 1998/08/17 v1.1c Standard LaTeX option (left equation numbers)
+) (/usr/share/texmf-texlive/tex/latex/base/bk12.clo
+File: bk12.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (/usr/share/texmf-texlive/tex/latex/base/inputenc.sty
+Package: inputenc 2006/05/05 v1.1b Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+(/usr/share/texmf-texlive/tex/latex/base/latin1.def
+File: latin1.def 2006/05/05 v1.1b Input encoding file
+)) (/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+(/usr/share/texmf-texlive/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+)) (/usr/share/texmf-texlive/tex/generic/babel/babel.sty
+Package: babel 2005/11/23 v3.8h The Babel package
+(/usr/share/texmf-texlive/tex/generic/babel/frenchb.ldf
+Language: french 2005/02/06 v1.6g French support from the babel system
+(/usr/share/texmf-texlive/tex/generic/babel/babel.def
+File: babel.def 2005/11/23 v3.8h Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+)
+Package babel Info: Making : an active character on input line 219.
+Package babel Info: Making ; an active character on input line 220.
+Package babel Info: Making ! an active character on input line 221.
+Package babel Info: Making ? an active character on input line 222.
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 299.
+\parindentFFN=\dimen104
+\std@mcc=\count89
+\dec@mcc=\count90
+*************************************
+* Local config file frenchb.cfg used
+*
+(/usr/share/texmf-texlive/tex/generic/babel/frenchb.cfg))) (/usr/share/texmf-te
+xlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+) (/usr/share/texmf-texlive/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2000/07/18 v2.13 AMS math features
+\@mathmargin=\skip43
+For additional information on amsmath, use the `?' option.
+(/usr/share/texmf-texlive/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+(/usr/share/texmf-texlive/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks16
+\ex@=\dimen105
+)) (/usr/share/texmf-texlive/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen106
+) (/usr/share/texmf-texlive/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count91
+LaTeX Info: Redefining \frac on input line 211.
+\uproot@=\count92
+\leftroot@=\count93
+LaTeX Info: Redefining \overline on input line 307.
+\classnum@=\count94
+\DOTSCASE@=\count95
+LaTeX Info: Redefining \ldots on input line 379.
+LaTeX Info: Redefining \dots on input line 382.
+LaTeX Info: Redefining \cdots on input line 467.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen107
+LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
+\macc@depth=\count96
+\c@MaxMatrixCols=\count97
+\dotsspace@=\muskip10
+\c@parentequation=\count98
+\dspbrk@lvl=\count99
+\tag@help=\toks17
+\row@=\count100
+\column@=\count101
+\maxfields@=\count102
+\andhelp@=\toks18
+\eqnshift@=\dimen108
+\alignsep@=\dimen109
+\tagshift@=\dimen110
+\tagwidth@=\dimen111
+\totwidth@=\dimen112
+\lineht@=\dimen113
+\@envbody=\toks19
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks20
+LaTeX Info: Redefining \[ on input line 2666.
+LaTeX Info: Redefining \] on input line 2667.
+) (/usr/share/texmf-texlive/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2002/01/22 v2.2d
+(/usr/share/texmf-texlive/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2001/10/25 v2.2f
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 132.
+)) (/usr/share/texmf-texlive/tex/latex/jknapltx/mathrsfs.sty
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup6
+) (/usr/share/texmf-texlive/tex/latex/base/alltt.sty
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+) (/usr/share/texmf-texlive/tex/latex/bigfoot/perpage.sty
+Package: perpage 2006/07/15 1.12 Reset/sort counters per page
+\c@abspage=\count103
+) (/usr/share/texmf-texlive/tex/latex/tools/calc.sty
+Package: calc 2005/08/06 v4.2 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count104
+\calc@Bcount=\count105
+\calc@Adimen=\dimen114
+\calc@Bdimen=\dimen115
+\calc@Askip=\skip46
+\calc@Bskip=\skip47
+LaTeX Info: Redefining \setlength on input line 75.
+LaTeX Info: Redefining \addtolength on input line 76.
+\calc@Ccount=\count106
+\calc@Cskip=\skip48
+)
+\MySkip=\skip49
+(/usr/share/texmf-texlive/tex/latex/base/fix-cm.sty
+Package: fix-cm 2006/03/24 v1.1n fixes to LaTeX
+(/usr/share/texmf-texlive/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)) (/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip50
+\f@ncyO@elh=\skip51
+\f@ncyO@erh=\skip52
+\f@ncyO@olh=\skip53
+\f@ncyO@orh=\skip54
+\f@ncyO@elf=\skip55
+\f@ncyO@erf=\skip56
+\f@ncyO@olf=\skip57
+\f@ncyO@orf=\skip58
+) (/usr/share/texmf-texlive/tex/latex/geometry/geometry.sty
+Package: geometry 2002/07/08 v3.2 Page Geometry
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks21
+)
+\Gm@cnth=\count107
+\Gm@cntv=\count108
+\c@Gm@tempcnt=\count109
+\Gm@bindingoffset=\dimen116
+\Gm@wd@mp=\dimen117
+\Gm@odd@mp=\dimen118
+\Gm@even@mp=\dimen119
+\Gm@dimlist=\toks22
+(/usr/share/texmf-texlive/tex/xelatex/xetexconfig/geometry.cfg)) (/usr/share/te
+xmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2007/02/07 v6.75r Hypertext links for LaTeX
+\@linkdim=\dimen120
+\Hy@linkcounter=\count110
+\Hy@pagecounter=\count111
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
+) (/etc/texmf/tex/latex/config/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+) (/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2006/08/22 v2.4 Connects package keyval with LaTeX options (
+HO)
+)
+Package hyperref Info: Option `hyperfootnotes' set `false' on input line 2238.
+Package hyperref Info: Option `bookmarks' set `true' on input line 2238.
+Package hyperref Info: Option `linktocpage' set `false' on input line 2238.
+Package hyperref Info: Option `pdfdisplaydoctitle' set `true' on input line 223
+8.
+Package hyperref Info: Option `pdfpagelabels' set `true' on input line 2238.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 2238.
+Package hyperref Info: Option `colorlinks' set `true' on input line 2238.
+Package hyperref Info: Hyper figures OFF on input line 2288.
+Package hyperref Info: Link nesting OFF on input line 2293.
+Package hyperref Info: Hyper index ON on input line 2296.
+Package hyperref Info: Plain pages OFF on input line 2303.
+Package hyperref Info: Backreferencing OFF on input line 2308.
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 2444.
+(/usr/share/texmf-texlive/tex/latex/ltxmisc/url.sty
+\Urlmuskip=\muskip11
+Package: url 2005/06/27  ver 3.2  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 2599.
+\Fld@menulength=\count112
+\Field@Width=\dimen121
+\Fld@charsize=\dimen122
+\Choice@toks=\toks23
+\Field@toks=\toks24
+Package hyperref Info: Hyper figures OFF on input line 3102.
+Package hyperref Info: Link nesting OFF on input line 3107.
+Package hyperref Info: Hyper index ON on input line 3110.
+Package hyperref Info: backreferencing OFF on input line 3117.
+Package hyperref Info: Link coloring ON on input line 3120.
+\Hy@abspage=\count113
+\c@Item=\count114
+)
+*hyperref using driver hpdftex*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2007/02/07 v6.75r Hyperref driver for pdfTeX
+\Fld@listcount=\count115
+)
+\TmpLen=\skip59
+\c@pp@a@footnote=\count116
+\c@myunit=\count117
+(./33083-t.aux)
+\openout1 = `33083-t.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 461.
+LaTeX Font Info:    ... okay on input line 461.
+LaTeX Font Info:    Checking defaults for T1/lmr/m/n on input line 461.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 461.
+(/usr/share/texmf/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2007/01/14 v1.3 Font defs for Latin Modern
+)
+LaTeX Font Info:    ... okay on input line 461.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 461.
+LaTeX Font Info:    ... okay on input line 461.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 461.
+LaTeX Font Info:    ... okay on input line 461.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 461.
+LaTeX Font Info:    ... okay on input line 461.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 461.
+LaTeX Font Info:    ... okay on input line 461.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 461.
+LaTeX Font Info:    ... okay on input line 461.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 461.
+LaTeX Font Info:    ... okay on input line 461.
+LaTeX Info: Redefining \dots on input line 461.
+-------------------- Geometry parameters
+paper: a4paper
+landscape: --
+twocolumn: --
+twoside: true
+asymmetric: --
+h-parts: 87.23615pt, 379.4175pt, 130.85423pt
+v-parts: 95.19171pt, 607.06755pt, 142.78758pt
+hmarginratio: 2:3
+vmarginratio: 2:3
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  597.50787pt
+\paperheight 845.04684pt
+\textwidth  379.4175pt
+\textheight 607.06755pt
+\oddsidemargin  14.96616pt
+\evensidemargin 58.58424pt
+\topmargin  -8.95207pt
+\headheight 15.0pt
+\headsep    19.8738pt
+\footskip   30.0pt
+\marginparwidth 88.0pt
+\marginparsep   7.0pt
+\columnsep  10.0pt
+\skip\footins  10.8pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+\@twosidetrue \@mparswitchtrue 
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+(/usr/share/texmf-texlive/tex/latex/graphics/color.sty
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2007/01/08 v0.04d Graphics/color for pdfTeX
+\Gread@gobject=\count118
+(/usr/share/texmf/tex/context/base/supp-pdf.tex
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count119
+\scratchdimen=\dimen123
+\scratchbox=\box28
+\nofMPsegments=\count120
+\nofMParguments=\count121
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count122
+\MPscratchDim=\dimen124
+\MPnumerator=\count123
+\everyMPtoPDFconversion=\toks26
+)))
+Package hyperref Info: Link coloring ON on input line 461.
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
+)
+\c@section@level=\count124
+)
+LaTeX Info: Redefining \ref on input line 461.
+LaTeX Info: Redefining \pageref on input line 461.
+(./33083-t.out) (./33083-t.out)
+\@outlinefile=\write3
+\openout3 = `33083-t.out'.
+
+
+Overfull \hbox (2.05862pt too wide) in paragraph at lines 477--477
+[]\T1/cmtt/m/n/9.2 The Project Gutenberg EBook of Étude sur le Mouvement Perman
+ent des Fluides, by[] 
+ []
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 500.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 500.
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2002/01/19 v2.2g AMS font definitions
+)
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 500.
+(/usr/share/texmf-texlive/tex/latex/jknapltx/ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+) [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
+
+] [1
+
+] [2] [3] [4
+
+] [1
+
+] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] 
+[19] [20]
+Overfull \hbox (1.79578pt too wide) detected at line 1870
+[] \OML/cmm/m/it/11 m [] \OT1/cmr/m/n/11 = \OML/cmm/m/it/11 m [][] [] ;
+ []
+
+[21]
+Underfull \hbox (badness 1057) in paragraph at lines 1938--1948
+[][][][] \T1/cmr/m/n/12 1$[]$Le pre-mier membre de cette équa-tion re-pré-sen-t
+ant le demi-
+ []
+
+[22] [23] [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37]
+[38]
+Underfull \hbox (badness 10000) in paragraph at lines 2869--2894
+
+ []
+
+[39
+
+] [40] [41
+
+] [42
+
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[43
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[44]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[45]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[46]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[47]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[48] [49] (./33083-t.aux)
+
+ *File List*
+    book.cls    2005/09/16 v1.4f Standard LaTeX document class
+   leqno.clo    1998/08/17 v1.1c Standard LaTeX option (left equation numbers)
+    bk12.clo    2005/09/16 v1.4f Standard LaTeX file (size option)
+inputenc.sty    2006/05/05 v1.1b Input encoding file
+  latin1.def    2006/05/05 v1.1b Input encoding file
+ fontenc.sty
+   t1enc.def    2005/09/27 v1.99g Standard LaTeX file
+   babel.sty    2005/11/23 v3.8h The Babel package
+ frenchb.ldf
+ frenchb.cfg
+  ifthen.sty    2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+ amsmath.sty    2000/07/18 v2.13 AMS math features
+ amstext.sty    2000/06/29 v2.01
+  amsgen.sty    1999/11/30 v2.0
+  amsbsy.sty    1999/11/29 v1.2d
+  amsopn.sty    1999/12/14 v2.01 operator names
+ amssymb.sty    2002/01/22 v2.2d
+amsfonts.sty    2001/10/25 v2.2f
+mathrsfs.sty    1996/01/01 Math RSFS package v1.0 (jk)
+   alltt.sty    1997/06/16 v2.0g defines alltt environment
+ perpage.sty    2006/07/15 1.12 Reset/sort counters per page
+    calc.sty    2005/08/06 v4.2 Infix arithmetic (KKT,FJ)
+  fix-cm.sty    2006/03/24 v1.1n fixes to LaTeX
+  ts1enc.def    2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+fancyhdr.sty    
+geometry.sty    2002/07/08 v3.2 Page Geometry
+  keyval.sty    1999/03/16 v1.13 key=value parser (DPC)
+geometry.cfg
+hyperref.sty    2007/02/07 v6.75r Hypertext links for LaTeX
+  pd1enc.def    2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
+hyperref.cfg    2002/06/06 v1.2 hyperref configuration of TeXLive
+kvoptions.sty    2006/08/22 v2.4 Connects package keyval with LaTeX options (HO
+)
+     url.sty    2005/06/27  ver 3.2  Verb mode for urls, etc.
+ hpdftex.def    2007/02/07 v6.75r Hyperref driver for pdfTeX
+   t1lmr.fd    2007/01/14 v1.3 Font defs for Latin Modern
+   color.sty    2005/11/14 v1.0j Standard LaTeX Color (DPC)
+   color.cfg    2007/01/18 v1.5 color configuration of teTeX/TeXLive
+  pdftex.def    2007/01/08 v0.04d Graphics/color for pdfTeX
+supp-pdf.tex
+ nameref.sty    2006/12/27 v2.28 Cross-referencing by name of section
+refcount.sty    2006/02/20 v3.0 Data extraction from references (HO)
+ 33083-t.out
+ 33083-t.out
+    umsa.fd    2002/01/19 v2.2g AMS font definitions
+    umsb.fd    2002/01/19 v2.2g AMS font definitions
+   ursfs.fd    1998/03/24 rsfs font definition file (jk)
+ ***********
+
+ ) 
+Here is how much of TeX's memory you used:
+ 5824 strings out of 94074
+ 78652 string characters out of 1165154
+ 147364 words of memory out of 1500000
+ 8769 multiletter control sequences out of 10000+50000
+ 44969 words of font info for 105 fonts, out of 1200000 for 2000
+ 645 hyphenation exceptions out of 8191
+ 26i,24n,43p,287b,488s stack positions out of 5000i,500n,6000p,200000b,5000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texmf-
+texlive/fonts/type1/bluesky/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1
+/bluesky/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi10.
+pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmmi8.pfb></usr/share/texm
+f-texlive/fonts/type1/bluesky/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type
+1/bluesky/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmr8.pfb
+></usr/share/texmf-texlive/fonts/type1/bluesky/cm/cmsy10.pfb></usr/share/texmf-
+texlive/fonts/type1/bluesky/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/
+bluesky/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/bluesky/ams/msam10.p
+fb></usr/share/texmf-texlive/fonts/type1/hoekwater/rsfs/rsfs10.pfb></usr/share/
+texmf/fonts/type1/public/cm-super/sfbi1000.pfb></usr/share/texmf/fonts/type1/pu
+blic/cm-super/sfbx0700.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx08
+00.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/t
+exmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/pub
+lic/cm-super/sfcc1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc120
+0.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/te
+xmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/publ
+ic/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200
+.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti0800.pfb></usr/share/tex
+mf/fonts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf/fonts/type1/publi
+c/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0900.
+pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1000.pfb></usr/share/texm
+f/fonts/type1/public/cm-super/sfxc1200.pfb>
+Output written on 33083-t.pdf (55 pages, 625839 bytes).
+PDF statistics:
+ 806 PDF objects out of 1000 (max. 8388607)
+ 228 named destinations out of 1000 (max. 131072)
+ 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+
