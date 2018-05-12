@@ -1,0 +1,29 @@
+_repo: -tude-sur-le-Mouvement-Permanent-des-Fluides--13-Th-ses-Pr-sent-es---la-Facult--des-Sciences-__33083
+_version: 0.1.0
+covers:
+- cover_type: generated
+  image_path: cover.png
+creator:
+  author:
+    agent_name: Salvert, François de
+    alias: Salvert, Francois de
+    gutenberg_agent_id: '36195'
+    url: http://www.gutenberg.org/2009/agents/36195
+description: ''
+gutenberg_bookshelf:
+- Mathematics
+- FR Sciences et Techniques
+gutenberg_issued: '2010-07-05'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '33083'
+language: fr
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'QA'
+- !lcsh 'Hydrodynamics'
+title: "Étude sur le Mouvement Permanent des Fluides\r\nThèses Présentées à la Faculté\
+  \ des Sciences de Paris pour Obtenir le Grade de Docteur ès Sciences Mathématiques"
+url: http://www.gutenberg.org/ebooks/33083
