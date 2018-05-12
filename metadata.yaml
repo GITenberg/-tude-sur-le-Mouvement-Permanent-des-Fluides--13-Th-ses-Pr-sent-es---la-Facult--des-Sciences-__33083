@@ -10,6 +10,8 @@ creator:
     gutenberg_agent_id: '36195'
     url: http://www.gutenberg.org/2009/agents/36195
 description: ''
+edition_identifiers:
+  edition_id: http://www.gutenberg.org/ebooks/33083#-tude-sur-le-Mouvement-Permanent-des-Fluides--13-Th-ses-Pr-sent-es---la-Facult--des-Sciences-_
 gutenberg_bookshelf:
 - Mathematics
 - FR Sciences et Techniques
